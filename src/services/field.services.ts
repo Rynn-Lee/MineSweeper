@@ -19,12 +19,30 @@ export const filedServices = {
           bomb && (bombCounter += 1)
           newArr[i].push({
             isBomb: (!bombCounter && (gameProperties.width-1 == i) && (gameProperties.height-1 == j)) ? true : bomb,
-            clicked: false
+            clicked: false,
+            bombsAround: 0
           })
         }
       }
     }
     await generateField()
     return newArr
+  },
+  countBombs(gameProperties: any, gameField: any, row: any, cell: any){
+    let counter: number = 0
+    console.log("HEIGHT:", gameProperties.height)
+    console.log("WIDTH:", gameProperties.width)
+    console.log("row:", row)
+    console.log("cell:", cell)
+
+    cell-1 >= 0 && (gameField[row][cell-1].isBomb && (counter += 1))
+    row-1 >= 0 && (gameField[row-1][cell].isBomb && (counter += 1))
+    row-1 >= 0 && cell-1 >= 0 && (gameField[row-1][cell-1].isBomb && (counter += 1))
+    gameProperties.width != row+1 && cell-1 >= 0 && (gameField[row+1][cell-1].isBomb && (counter += 1))
+    gameProperties.width != row+1 && (gameField[row+1][cell].isBomb && (counter += 1))
+    gameProperties.height != cell+1 && (gameField[row][cell+1].isBomb && (counter += 1))
+    gameProperties.width != row+1 && gameProperties.height != cell+1 && (gameField[row+1][cell+1].isBomb && (counter += 1))
+    row-1 >= 0 && gameProperties.height != cell+1 && (gameField[row-1][cell+1].isBomb && (counter += 1))
+    return counter
   }
 }

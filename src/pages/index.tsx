@@ -36,11 +36,14 @@ export default function Home() {
   }
 
   const sweepCell = (row: number, cell: number) => {
-    if(gameField[row][cell].clicked){return}
+    if(gameField[row][cell].clicked || gameProperties.gameState == 2){return}
     setGameProperties({...gameProperties, clicks: gameProperties.clicks + 1})
-
+    
     !gameField[row][cell].clicked && (gameField[row][cell].clicked = true)
     gameField[row][cell].isBomb && setGameProperties({...gameProperties, gameState: 2})
+
+    const bombcounter = services.filed.countBombs(gameProperties, gameField, row, cell)
+    gameField[row][cell].bombsAround = bombcounter
   }
 
   useEffect(()=>{

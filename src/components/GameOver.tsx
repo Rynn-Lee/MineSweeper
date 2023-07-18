@@ -6,19 +6,19 @@ export function GameOver({gameProperties, setField}: any){
         <tbody>
           <tr>
             <td>Clicked: </td>
-            <td>{gameProperties.clicks}</td>
+            <td>{gameProperties?.clicks}</td>
           </tr>
           <tr>
             <td>Field: </td>
-            <td>{gameProperties.width} x {gameProperties.height}</td>
+            <td>{gameProperties?.width} x {gameProperties?.height}</td>
           </tr>
           <tr>
             <td>Score: </td>
-            <td>{gameProperties.userScore}</td>
+            <td>{gameProperties?.userScore}</td>
           </tr>
           <tr>
             <td>Bomb multiplyer: </td>
-            <td>x{gameProperties.userScore}</td>
+            <td>x{gameProperties?.userScore}</td>
           </tr>
         </tbody>
       </table>

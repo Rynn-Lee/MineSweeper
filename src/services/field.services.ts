@@ -20,7 +20,8 @@ export const filedServices = {
           newArr[i].push({
             isBomb: (!bombCounter && (gameProperties.width-1 == i) && (gameProperties.height-1 == j)) ? true : bomb,
             clicked: false,
-            bombsAround: 0
+            bombsAround: 0,
+            markedAsBomb: false
           })
         }
       }

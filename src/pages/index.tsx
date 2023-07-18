@@ -10,6 +10,7 @@ export default function Home() {
   const [gameField, setGameField] = useState<any>([])
   const [gameProperties, setGameProperties] = useState({
     userScore: 0,
+    bombsMarked: 0,
     attempts: 0,
     height: 0,
     width: 0,
@@ -25,7 +26,7 @@ export default function Home() {
         setGameProperties({...gameProperties,
           userScore: 0,
           attempts: 0,
-          gameState: 0,
+          gameState: 1,
           clicks: 0
         })
       }
@@ -36,7 +37,7 @@ export default function Home() {
   }
 
   const sweepCell = (row: number, cell: number) => {
-    if(gameField[row][cell].clicked || gameProperties.gameState == 2){return}
+    if(gameField[row][cell].clicked || gameProperties.gameState == 2 || gameField[row][cell].markedAsBomb){return}
     setGameProperties({...gameProperties, clicks: gameProperties.clicks + 1})
     
     !gameField[row][cell].clicked && (gameField[row][cell].clicked = true)
@@ -44,6 +45,12 @@ export default function Home() {
 
     const bombcounter = services.filed.countBombs(gameProperties, gameField, row, cell)
     gameField[row][cell].bombsAround = bombcounter.counter
+  }
+
+  const markBomb = (row: number, cell: number) => {
+    if(gameField[row][cell].clicked || gameProperties.gameState == 2){return}
+    setGameProperties({...gameProperties, bombsMarked: gameProperties.bombsMarked + 1})
+    gameField[row][cell].markedAsBomb = !gameField[row][cell].markedAsBomb
   }
 
   useEffect(()=>{
@@ -64,10 +71,12 @@ export default function Home() {
         gameProperties={gameProperties}
         setGameProperties={setGameProperties}
         setField={setField}/>
-        <GameField
+
+        {gameProperties.gameState >= 1 ? <GameField
         gameField={gameField}
         sweepCell={sweepCell}
-        gameProperties={gameProperties}/>
+        markBomb={markBomb}
+        gameProperties={gameProperties}/> : ""}
 
         <Stats
         gameProperties={gameProperties}/>

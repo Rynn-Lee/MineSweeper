@@ -16,7 +16,7 @@ export function Settings({gameProperties, setGameProperties, setField}: any){
         <label>Field H</label>
         <input value={gameProperties.height} onChange={(e)=>setGameProperties({...gameProperties, height: Number(e.target.value)})}/>
       </div>
-      <button onClick={setField}>Begin!</button>
+      <button onClick={setField}>Start!</button>
     </>
   )
 }

@@ -43,7 +43,7 @@ export default function Home() {
     gameField[row][cell].isBomb && setGameProperties({...gameProperties, gameState: 2})
 
     const bombcounter = services.filed.countBombs(gameProperties, gameField, row, cell)
-    gameField[row][cell].bombsAround = bombcounter
+    gameField[row][cell].bombsAround = bombcounter.counter
   }
 
   useEffect(()=>{

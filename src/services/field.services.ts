@@ -28,21 +28,34 @@ export const filedServices = {
     await generateField()
     return newArr
   },
-  countBombs(gameProperties: any, gameField: any, row: any, cell: any){
+  countBombs(gameProperties: any, gameField: any, row: any, cell: any, highlight: boolean = true){
     let counter: number = 0
-    console.log("HEIGHT:", gameProperties.height)
-    console.log("WIDTH:", gameProperties.width)
-    console.log("row:", row)
-    console.log("cell:", cell)
 
-    cell-1 >= 0 && (gameField[row][cell-1].isBomb && (counter += 1))
-    row-1 >= 0 && (gameField[row-1][cell].isBomb && (counter += 1))
-    row-1 >= 0 && cell-1 >= 0 && (gameField[row-1][cell-1].isBomb && (counter += 1))
-    gameProperties.width != row+1 && cell-1 >= 0 && (gameField[row+1][cell-1].isBomb && (counter += 1))
-    gameProperties.width != row+1 && (gameField[row+1][cell].isBomb && (counter += 1))
-    gameProperties.height != cell+1 && (gameField[row][cell+1].isBomb && (counter += 1))
-    gameProperties.width != row+1 && gameProperties.height != cell+1 && (gameField[row+1][cell+1].isBomb && (counter += 1))
-    row-1 >= 0 && gameProperties.height != cell+1 && (gameField[row-1][cell+1].isBomb && (counter += 1))
-    return counter
+    if(cell-1 >= 0){
+      gameField[row][cell-1].isBomb && (counter += 1)
+    }
+    if(row-1 >= 0){
+      gameField[row-1][cell].isBomb && (counter += 1)
+    }
+    if(row-1 >= 0 && cell-1 >= 0){
+      gameField[row-1][cell-1].isBomb && (counter += 1)
+    }
+    if(gameProperties.width != row+1 && cell-1 >= 0){
+      gameField[row+1][cell-1].isBomb && (counter += 1)
+    }
+    if(gameProperties.width != row+1){
+      gameField[row+1][cell].isBomb && (counter += 1)
+    }
+    if(gameProperties.height != cell+1){
+      gameField[row][cell+1].isBomb && (counter += 1)
+    }
+    if(gameProperties.width != row+1 && gameProperties.height != cell+1){
+      gameField[row+1][cell+1].isBomb && (counter += 1)
+    }
+    if(row-1 >= 0 && gameProperties.height != cell+1){
+      gameField[row-1][cell+1].isBomb && (counter += 1)
+    }
+
+    return {counter, gameField}
   }
 }

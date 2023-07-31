@@ -16,6 +16,10 @@ export function Settings({gameProperties, setGameProperties, setField}: any){
         <label>Field H</label>
         <input value={gameProperties.height} onChange={(e)=>setGameProperties({...gameProperties, height: Number(e.target.value)})}/>
       </div>
+      <div>
+        <label>Bomb Multiplyer</label>
+        <input value={gameProperties.multiplyer} onChange={(e)=>setGameProperties({...gameProperties, multiplyer: Number(e.target.value)})}/>
+      </div>
       <button onClick={setField}>Start!</button>
     </>
   )

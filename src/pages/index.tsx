@@ -9,25 +9,29 @@ import { useEffect, useState } from 'react'
 export default function Home() {
   const [gameField, setGameField] = useState<any>([])
   const [gameProperties, setGameProperties] = useState({
+    multiplyer: 1,
     userScore: 0,
     bombsMarked: 0,
     attempts: 0,
     height: 0,
     width: 0,
     gameState: 0,
-    clicks: 0
+    clicks: 0,
+    totalBombs: 0
   })
 
   const setField = async() => {
     try{
       const result = await services.filed.createField(gameProperties)
+      console.log(result)
       if(result){
-        setGameField(result)
+        setGameField(result.field)
         setGameProperties({...gameProperties,
           userScore: 0,
           attempts: 0,
           gameState: 1,
-          clicks: 0
+          clicks: 0,
+          totalBombs: result.gameProperties.totalBombs
         })
       }
     }
@@ -38,13 +42,14 @@ export default function Home() {
 
   const sweepCell = (row: number, cell: number) => {
     if(gameField[row][cell].clicked || gameProperties.gameState == 2 || gameField[row][cell].markedAsBomb){return}
+
     setGameProperties({...gameProperties, clicks: gameProperties.clicks + 1})
-    
     !gameField[row][cell].clicked && (gameField[row][cell].clicked = true)
     gameField[row][cell].isBomb && setGameProperties({...gameProperties, gameState: 2})
 
     const bombcounter = services.filed.countBombs(gameProperties, gameField, row, cell)
     gameField[row][cell].bombsAround = bombcounter.counter
+    setGameField(bombcounter.gameField)
   }
 
   const markBomb = (row: number, cell: number) => {
@@ -52,10 +57,6 @@ export default function Home() {
     setGameProperties({...gameProperties, bombsMarked: gameProperties.bombsMarked + 1})
     gameField[row][cell].markedAsBomb = !gameField[row][cell].markedAsBomb
   }
-
-  useEffect(()=>{
-    console.log("GAME FIELD!", gameField)
-  }, [gameField])
 
   return(
     <>

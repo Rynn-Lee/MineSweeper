@@ -1,4 +1,4 @@
-import { boolRandom } from "@/utils/randomizer"
+import { arrayFiller } from "@/utils/arrayFiller"
 
 export const filedServices = {
   async createField(gameProperties: any){
@@ -8,17 +8,14 @@ export const filedServices = {
     if(gameProperties.height > 18){
       throw new Error("Height is too big...")
     }
-
-    const newArr: any = []
-    let bombCounter = 0
+    
+    const field: any = []
     const generateField = async() => {
       for(let i = 0; i<gameProperties.width; i++){
-        newArr.push([])
+        field.push([])
         for(let j = 0; j<gameProperties.height; j++){
-          const bomb = boolRandom() 
-          bomb && (bombCounter += 1)
-          newArr[i].push({
-            isBomb: (!bombCounter && (gameProperties.width-1 == i) && (gameProperties.height-1 == j)) ? true : bomb,
+          field[i].push({
+            isBomb: false,
             clicked: false,
             bombsAround: 0,
             markedAsBomb: false
@@ -26,8 +23,14 @@ export const filedServices = {
         }
       }
     }
+
     await generateField()
-    return newArr
+    const filledField = arrayFiller(field, gameProperties)
+    if(filledField instanceof Error){
+      throw filledField
+    }
+    console.log("SERVICE FIELD", filledField)
+    return {field: filledField.array, gameProperties: filledField.gameProperties}
   },
   countBombs(gameProperties: any, gameField: any, row: any, cell: any, highlight: boolean = true){
     let counter: number = 0

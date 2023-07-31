@@ -18,7 +18,7 @@ export function GameOver({gameProperties, setField}: any){
           </tr>
           <tr>
             <td>Bomb multiplyer: </td>
-            <td>x{gameProperties?.userScore}</td>
+            <td>x{gameProperties?.multiplyer}</td>
           </tr>
         </tbody>
       </table>

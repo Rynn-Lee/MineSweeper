@@ -32,7 +32,7 @@ export const filedServices = {
     console.log("SERVICE FIELD", filledField)
     return {field: filledField.array, gameProperties: filledField.gameProperties}
   },
-  countBombs(gameProperties: any, gameField: any, row: any, cell: any, highlight: boolean = true){
+  countBombs(gameProperties: any, gameField: any, row: any, cell: any){
     let counter: number = 0
 
     if(cell-1 >= 0){

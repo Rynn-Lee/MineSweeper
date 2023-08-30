@@ -7,7 +7,7 @@
     "distDir": "../out"
   },
   "package": {
-    "productName": "Minesweeper Online",
+    "productName": "Rynn Lee's Game Pack",
     "version": "0.1.0"
   },
   "tauri": {
@@ -58,7 +58,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "Minesweeper Online",
+        "title": "Rynn Lee's Game Pack",
         "width": 800
       }
     ]

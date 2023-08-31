@@ -1,8 +1,12 @@
 import Head from "next/head";
-import Particlesbg from '@components/ParticlesBG'
 import styles from '@styles/applayout.module.sass'
+import BottomBar from "@/components/BottomBar";
+import Sidebar from "@/components/Sidebar";
+import { useState } from 'react'
 
-export default function AppLayout({children}: any){
+export default function AppLayout({children, setParticles, particles}: any){
+  const [openSettings, setOpenSettings] = useState(0)
+
   return(
     <>
       <Head>
@@ -11,9 +15,16 @@ export default function AppLayout({children}: any){
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className={styles.background}/>
-      <Particlesbg />
       <div className={styles.content}>
+        <Sidebar
+          setOpenSettings={setOpenSettings}
+          openSettings={openSettings}
+          setParticles={setParticles}
+          particles={particles}/>
         {children}
+        <BottomBar
+          setOpenSettings={setOpenSettings}
+          openSettings={openSettings}/>
       </div>
     </>
   )

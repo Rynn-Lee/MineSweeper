@@ -1,0 +1,42 @@
+.sidebarWrapper
+  z-index: 2
+  position: fixed
+  display: flex
+  top: 0px
+  width: 100vw
+  bottom: 44px
+
+.sidebar
+  position: fixed
+  top: 0px
+  padding: 5px 0px
+  background: #30303050
+  width: 300px
+  backdrop-filter: blur(2px)
+  bottom: 44px
+  left: -340px
+  transition: 200ms
+  font-size: 11pt
+  .title
+    width: 100%
+    font-size: 13pt
+    padding: 10px
+  .option
+    padding: 5px 10px
+    background: #30303090
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-between
+
+.sidebarOpen
+  left: 0px !important
+
+.closingArea
+  left: 340px
+  z-index: 1
+  position: fixed
+  display: flex
+  top: 0px
+  width: 100vw
+  bottom: 44px

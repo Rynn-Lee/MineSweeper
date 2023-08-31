@@ -7,9 +7,11 @@ export default function Particlesbg(){
   const loadParticles = async (main) => await loadFull(main)
 
   return(
-    <Particles 
-    id="tsparticles"
-    init={loadParticles}
-    options={ParticlesConfig}/>
+    <div style={{zIndex: 1}}>
+      <Particles 
+      id="tsparticles"
+      init={loadParticles}
+      options={ParticlesConfig}/>
+    </div>
   )
 }

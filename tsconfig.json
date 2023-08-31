@@ -21,6 +21,6 @@
       "@assets/*": ["./src/assets/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/ParticlesBackground.js", "src/components/ParticlesBG.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/ParticlesBackground.js", "src/configs/ParticlesBG.js"],
   "exclude": ["node_modules"]
 }

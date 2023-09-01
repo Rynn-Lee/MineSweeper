@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [particles, setParticles] = useState(true)
+  const [isDarkTheme, setIsDarkTheme] = useState(true)
 
   const toggleParticles = () => {
     setParticles(!particles)
@@ -19,8 +20,8 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [])
 
   return(
-    <AppLayout setParticles={toggleParticles} particles={particles}>
-      {particles ? <Particlesbg /> : <></>}
+    <AppLayout setParticles={toggleParticles} particles={particles} isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme}>
+      {particles ? <Particlesbg isDarkTheme={isDarkTheme}/> : <></>}
       <Component {...pageProps} />
     </AppLayout>
   )

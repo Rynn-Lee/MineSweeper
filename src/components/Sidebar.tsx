@@ -10,7 +10,7 @@ export default function Sidebar({setters, getters}: any){
         <span className={styles.title}>VISUALS</span>
         <div className={styles.option}><span>Background particles</span> <Toggle state={getters.particles} fn={setters.setParticles}/></div>
         <div className={styles.option}><span>Background Image</span> <Toggle state={getters.background} fn={()=>setters.setBackground(!getters.background)}/></div>
-        <div className={styles.option}><span>Dark Theme</span> <Toggle state={getters.background} fn={()=>setters.setBackground(!getters.background)}/></div>
+        <div className={styles.option}><span>Dark Theme</span> <Toggle state={getters.isDarkTheme} fn={()=>setters.setIsDarkTheme(!getters.isDarkTheme)}/></div>
       </div>
     </div>
   )

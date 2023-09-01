@@ -1,6 +1,6 @@
 export const localStorageService = {
   getItem(item: string){
-    const result: any = localStorage.getItem(item)
+    const result: any = localStorage.getItem(item) || null
     return JSON.parse(result)
   },
   setItem(item: string, value: any){
@@ -19,5 +19,10 @@ export const localStorageService = {
       throw new Error(error)
     }
     return true
+  },
+  compare(item: string, value: string){
+    const storageItme = localStorage.getItem(item)
+    if(storageItme === value){return true}
+    return false
   }
 }

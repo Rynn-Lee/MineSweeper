@@ -8,13 +8,16 @@ html[dark-theme="true"]
   --var-bg: url("../assets/images/triangles-dark.png")
   --var-font-color: #ffffff
   
+:root
+  --var-transition: 200ms
+
 @font-face 
   font-family: scp
   src: url("../assets/fonts/SourceCodePro-Regular.ttf")
   
 body
   font-family: scp
-  transition: 200ms
+  transition: var(--var-transition)
   color: var(--var-font-color)
   width: 100vw
   height: 100vh

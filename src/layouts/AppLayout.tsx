@@ -2,26 +2,13 @@ import Head from "next/head";
 import styles from '@styles/applayout.module.sass'
 import BottomBar from "@/components/BottomBar";
 import Sidebar from "@/components/Sidebar";
-import { useState, useEffect } from 'react'
-import { services } from "@/services";
+import { useState } from 'react'
 
-export default function AppLayout({children, setParticles, particles, isDarkTheme, setIsDarkTheme}: any){
+export default function AppLayout({children, setParticles, particles, isDarkTheme, setIsDarkTheme, toggleTheme}: any){
   const [openSettings, setOpenSettings] = useState(false)
   const [background, setBackground] = useState(true)
   
-  useEffect(()=>{
-    const isDark = services.localstorage.getItem('darkTheme')
-    if(!isDark){
-      setIsDarkTheme(true)
-      services.localstorage.setItem('darkTheme', true)
-      document.documentElement.setAttribute("dark-theme", 'true');
-      return
-    }
-    services.localstorage.setItem('darkTheme',isDarkTheme)
-    document.documentElement.setAttribute("dark-theme", `${isDarkTheme}`);
-  }, [isDarkTheme])
-
-  const setters = {setBackground, setOpenSettings, setParticles, setIsDarkTheme}
+  const setters = {setBackground, setOpenSettings, setParticles, toggleTheme}
   const getters = {particles, background, openSettings, isDarkTheme}
   return(
     <>

@@ -6,10 +6,10 @@ import { useState, useEffect } from 'react'
 export default function BottomBar({setters, getters}: any){
   const [icon, setIcon] = useState(getters.isDarkTheme)
   useEffect(()=>{
-    getters.isDarkTheme
+    getters.settings.darkTheme
       ? setIcon(assets.settingsLight)
       : setIcon(assets.settingsDark)
-  }, [getters.isDarkTheme])
+  }, [getters.settings.darkTheme])
 
   return(
     <div className={styles.bottombar}>

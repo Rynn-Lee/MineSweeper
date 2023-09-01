@@ -1,42 +1,48 @@
 import Particlesbg from '@/configs/ParticlesBG'
+import { useToggles } from '@/hooks/useToggles'
 import AppLayout from '@/layouts/AppLayout'
 import { services } from '@/services'
 import '@/styles/index.sass'
 import type { AppProps } from 'next/app'
 import { useState, useEffect } from 'react'
 
+interface settings {
+  particles?: boolean | null
+  darkTheme?: boolean | null
+  background?: boolean | null
+}
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [particles, setParticles] = useState(true)
-  const [isDarkTheme, setIsDarkTheme] = useState<boolean>()
+  const toggle: any = useToggles()
+  const [settings, setSettings] = useState({
+    particles: null,
+    darkTheme: null,
+    background: null
+  })
 
-  const toggleParticles = () => {
-    setParticles(!particles)
-    services.localstorage.setItem('particles', !particles)
-  }
-
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme)
-    document.documentElement.setAttribute("dark-theme", `${!isDarkTheme}`);
-    services.localstorage.setItem('darkTheme', !isDarkTheme)
-  }
+  const toggleParticles = () => setSettings((prevSettings) => ({...prevSettings, particles: toggle.toggle(prevSettings.particles, 'particles')}))
+  const toggleTheme = () => setSettings((prevSettings) => ({...prevSettings, darkTheme: toggle.toggle(prevSettings.darkTheme, 'darkTheme', 'dark-theme')}))
+  const toggleBackground = () => setSettings((prevSettings) => ({...prevSettings, background: toggle.toggle(prevSettings.background, 'background')}))
+  const [toggles] = useState({toggleBackground, toggleParticles, toggleTheme})
 
   useEffect(()=>{
-    setParticles(services.localstorage.getItem('particles'))
-
-    const themePreload = services.localstorage.getItem('darkTheme') || true
-    setParticles(themePreload)
-    document.documentElement.setAttribute("dark-theme", `${!themePreload}`);
+    if(!settings.darkTheme){
+      setSettings({
+        particles: services.localstorage.getItem('particles'),
+        darkTheme: services.localstorage.getItem('darkTheme'),
+        background: services.localstorage.getItem('background')
+      })
+    }
+    console.log(settings)
+    document.documentElement.setAttribute("dark-theme", `${settings.darkTheme}`);
   }, [])
 
   return(
     <AppLayout
-      setParticles={toggleParticles}
-      particles={particles}
-      isDarkTheme={isDarkTheme}
-      setIsDarkTheme={setIsDarkTheme}
-      toggleTheme={toggleTheme}>
-      {particles ? <Particlesbg isDarkTheme={isDarkTheme}/> : <></>}
+      toggles={toggles}
+      settings={settings}
+      setSettings={setSettings}>
+      {settings.particles ? <Particlesbg darkTheme={settings.darkTheme}/> : <></>}
       <Component {...pageProps} />
     </AppLayout>
   )

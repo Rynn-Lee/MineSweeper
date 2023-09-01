@@ -5,7 +5,7 @@ import ParticlesConfigDark from '@configs/particlesjs-config-dark'
 import { useEffect, useState } from "react"
 import { services } from "@/services"
 
-export default function Particlesbg({isDarkTheme}){
+export default function Particlesbg({darkTheme}){
   const loadParticles = async (main) => await loadFull(main)
 
   return(
@@ -13,7 +13,7 @@ export default function Particlesbg({isDarkTheme}){
       <Particles 
       id="tsparticles"
       init={loadParticles}
-      options={isDarkTheme ? ParticlesConfigLight : ParticlesConfigDark}/>
+      options={darkTheme ? ParticlesConfigLight : ParticlesConfigDark}/>
     </div>
   )
 }

@@ -14,34 +14,26 @@ interface settings {
 
 export default function App({ Component, pageProps }: AppProps) {
   const toggle: any = useToggles()
-  const [settings, setSettings] = useState({
+  const [isSetup, setIsSetup] = useState(true)
+  const [settings, setSettings] = useState<settings>({
     particles: null,
     darkTheme: null,
-    background: null
+    background: null,
   })
 
-  const toggleParticles = () => setSettings((prevSettings) => ({...prevSettings, particles: toggle.toggle(prevSettings.particles, 'particles')}))
-  const toggleTheme = () => setSettings((prevSettings) => ({...prevSettings, darkTheme: toggle.toggle(prevSettings.darkTheme, 'darkTheme', 'dark-theme')}))
-  const toggleBackground = () => setSettings((prevSettings) => ({...prevSettings, background: toggle.toggle(prevSettings.background, 'background')}))
-  const [toggles] = useState({toggleBackground, toggleParticles, toggleTheme})
-
-  useEffect(()=>{
-    if(!settings.darkTheme){
-      setSettings({
-        particles: services.localstorage.getItem('particles'),
-        darkTheme: services.localstorage.getItem('darkTheme'),
-        background: services.localstorage.getItem('background')
-      })
-    }
-    console.log(settings)
-    document.documentElement.setAttribute("dark-theme", `${settings.darkTheme}`);
-  }, [])
+  const [toggles] = useState({
+    toggleParticles: ()=>setSettings((prevSettings) => ({...prevSettings, particles: toggle.toggle(prevSettings.particles, 'particles')})),
+    toggleTheme: ()=>setSettings((prevSettings) => ({...prevSettings, darkTheme: toggle.toggle(prevSettings.darkTheme, 'darkTheme', 'dark-theme')})),
+    toggleBackground: ()=>setSettings((prevSettings) => ({...prevSettings, background: toggle.toggle(prevSettings.background, 'background')}))
+  })
 
   return(
     <AppLayout
       toggles={toggles}
       settings={settings}
-      setSettings={setSettings}>
+      setSettings={setSettings}
+      isSetup={isSetup}
+      setIsSetup={()=>setIsSetup(false)}>
       {settings.particles ? <Particlesbg darkTheme={settings.darkTheme}/> : <></>}
       <Component {...pageProps} />
     </AppLayout>

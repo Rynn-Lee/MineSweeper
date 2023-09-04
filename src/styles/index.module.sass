@@ -21,16 +21,21 @@
   flex-direction: column
   text-align: right
   flex: 1
-  span
+  button
+    border: none
+    color: var(--var-font-color)
     padding: 10px 20px
     margin: 5px 0px
-    width: 200px
+    width: 230px
     text-align: center
     border-radius: 10px
-    background: #30303050
+    background: var(--var-buttons-bg)
     backdrop-filter: blur(1px)
     font-size: 14pt
     transition: var(--var-transition)
-    &:hover
+    &:enabled:hover
       cursor: pointer
-      background: #50505050
+      background: var(--var-buttons-bg-hover)
+    &:disabled
+      background: #ad5f5f50 !important
+      color: #a1a1a190 !important

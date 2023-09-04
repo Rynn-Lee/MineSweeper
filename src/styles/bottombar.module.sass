@@ -22,21 +22,47 @@
     cursor: pointer
 
 .userStats
+  padding: 0px 0px 0px 20px
+  border-radius: 20px
   display: flex
   flex-direction: row
   align-items: center
-  justify-content: flex-end
+  cursor: pointer
+  justify-content: center
+  transition: var(--var-transition)
   text-align: right
+  &:hover
+    background: #50505050
   div
     margin: 0px 5px
     display: flex
+    justify-content: center
+    align-items: center
     flex-direction: column
     div
       display: flex
-      justify-content: center
+      justify-content: space-between
       align-items: center
       flex-direction: row
 
 .profileImage
   border-radius: 50px
   overflow: hidden
+
+.lvl
+  font-size: 9pt
+.exp
+  display: flex
+  width: 100%
+  justify-content: space-between
+  font-size: 11pt
+  span
+    &:first-child
+      flex: 1
+      font-size: 8pt
+    &:last-child
+      text-align: center
+      flex: 4
+      max-width: 200px
+      word-break: break-all
+      

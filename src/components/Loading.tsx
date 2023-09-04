@@ -9,15 +9,17 @@ export default function Loading({setters, getters}: any){
 
   useEffect(()=>{
     const setts = {
-      particles: services.localstorage.getItem('particles'),
-      darkTheme: services.localstorage.getItem('darkTheme'),
-      background: services.localstorage.getItem('background')
+      particles: services.localstorage.getItem('particles', true),
+      darkTheme: services.localstorage.getItem('darkTheme', true),
+      background: services.localstorage.getItem('background', true),
+      localAccount: services.localstorage.getItem('localAccount', true)
     }
     if(!getters.settings.darkTheme){
       setters.setSettings({
         particles: setts.particles,
         darkTheme: setts.darkTheme,
-        background: setts.background
+        background: setts.background,
+        localAccount: setts.localAccount
       })
     }
     document.documentElement.setAttribute("dark-theme", `${setts.darkTheme}`);

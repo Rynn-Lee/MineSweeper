@@ -1,15 +1,15 @@
 import Particlesbg from '@/configs/ParticlesBG'
 import { useToggles } from '@/hooks/useToggles'
 import AppLayout from '@/layouts/AppLayout'
-import { services } from '@/services'
 import '@/styles/index.sass'
 import type { AppProps } from 'next/app'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 interface settings {
   particles?: boolean | null
   darkTheme?: boolean | null
   background?: boolean | null
+  localAccount?: boolean | null
 }
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
     particles: null,
     darkTheme: null,
     background: null,
+    localAccount: null
   })
 
   const [toggles] = useState({

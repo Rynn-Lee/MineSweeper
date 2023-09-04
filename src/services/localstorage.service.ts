@@ -1,10 +1,14 @@
 export const localStorageService = {
-  getItem(item: string){
-    const result: any = localStorage.getItem(item) || null
+  getItem(item: string, setTo?: any){
+    const result: any = localStorage.getItem(item) || setTo || null
+    if(setTo && (!result || !result.length)){
+      this.setItem(item, setTo)
+    }
     return JSON.parse(result)
   },
   setItem(item: string, value: any){
     const valueToSet = JSON.stringify(value)
+    console.log("CALL TO SET", item, valueToSet)
     try{
       localStorage.setItem(item, valueToSet)
     } catch (error: any) {

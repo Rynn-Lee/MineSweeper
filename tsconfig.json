@@ -18,7 +18,8 @@
       "@styles/*": ["./src/styles/*"],
       "@configs/*": ["./src/configs/*"],
       "@components/*": ["./src/components/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/ParticlesBackground.js", "src/configs/ParticlesBG.js"],

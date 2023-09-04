@@ -2,7 +2,7 @@ import { assets } from '@/assets/assets'
 import styles from '@styles/bottombar.module.sass'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { LevelProgress } from './UI'
+import UserStats from './Bottombar/UserStats'
 
 export default function BottomBar({setters, getters}: any){
   const [icon, setIcon] = useState(getters.isDarkTheme)
@@ -21,13 +21,7 @@ export default function BottomBar({setters, getters}: any){
             <Image src={icon} alt="settings" width={20} height={20}/>
           </span>
         </div>
-        <div className={styles.userStats}>
-          <div>
-            <span>{getters.userData.login}</span>
-            <div><span>Lvl {getters.userData.lvl}</span><LevelProgress getters={getters}/></div>
-          </div>
-          <span><Image src="https://avatars.githubusercontent.com/u/38906839?v=4" alt="pfp" width={35} height={35} className={styles.profileImage}/></span>
-        </div>
+        <UserStats getters={getters} setters={setters}/>
       </div> : <></>}
     </>
   )

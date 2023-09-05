@@ -9,7 +9,6 @@ interface settings {
   particles?: boolean | null
   darkTheme?: boolean | null
   background?: boolean | null
-  localAccount?: boolean | null
 }
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -18,8 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [settings, setSettings] = useState<settings>({
     particles: null,
     darkTheme: null,
-    background: null,
-    localAccount: null
+    background: null
   })
 
   const [toggles] = useState({

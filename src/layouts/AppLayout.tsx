@@ -2,28 +2,28 @@ import Head from "next/head";
 import styles from '@styles/applayout.module.sass'
 import BottomBar from "@/components/BottomBar";
 import Sidebar from "@/components/Sidebar";
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import Loading from "@/components/Loading";
-import { CountExperience } from "@/utils/CountExperience";
+import { useObserver } from "@/hooks/useObserver";
 
 export default function AppLayout({children, setSettings, settings, toggles, setIsSetup, isSetup}: any){
   const [openSettings, setOpenSettings] = useState(false)
   const [userData, setUserData] = useState({
-    login: 'localAccount',
+    accountName: 'NewMinesweeper',
     experience: 0,
     xpNeeded: 100,
     xpLeft: 0,
     lvl: 0,
     image: ''
   })
-  
+
   useEffect(()=>{
-    const expData: any = CountExperience(userData.experience)
-    setUserData({...userData, ...expData})
-  }, [])
-  
+    console.log(userData)
+  })
+
   const setters = {setOpenSettings, toggles, setSettings, setIsSetup, setUserData}
   const getters = {openSettings, settings, userData}
+  const observer = useObserver(userData, "userData", true)
 
   return(
     <>

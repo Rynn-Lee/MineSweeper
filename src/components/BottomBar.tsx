@@ -14,7 +14,6 @@ export default function BottomBar({setters, getters}: any){
 
   return(
     <>
-      {getters.settings.darkTheme != null ?
       <div className={styles.bottombar}>
         <div>
           <span className={styles.icons} onClick={()=>setters.setOpenSettings(!getters.openSettings)}>
@@ -22,7 +21,7 @@ export default function BottomBar({setters, getters}: any){
           </span>
         </div>
         <UserStats getters={getters} setters={setters}/>
-      </div> : <></>}
+      </div>
     </>
   )
 }

@@ -5,11 +5,20 @@
   flex-direction: row
   justify-content: center
   align-items: center
+
+.line
+  backdrop-filter: blur(2px)
+  display: flex
+  flex-direction: row
+  align-items: center
   padding: 0px 100px
+  height: 100px
+  width: 100vw
+  background: #40404050
 
 .logo
   pointer-events: none
-  flex: 1
+  flex: 2
   font-size: 20pt
   text-align: center
   .version
@@ -18,24 +27,25 @@
 .buttons
   display: flex
   align-items: center
-  flex-direction: column
+  flex-direction: row
   text-align: right
   flex: 1
   button
+    transform: scale(1)
     border: none
     color: var(--var-font-color)
     padding: 10px 20px
     margin: 5px 0px
+    height: 100px
     width: 230px
     text-align: center
-    border-radius: 10px
     background: var(--var-buttons-bg)
-    backdrop-filter: blur(1px)
-    font-size: 14pt
+    font-size: 13pt
     transition: var(--var-transition)
     &:enabled:hover
       cursor: pointer
       background: var(--var-buttons-bg-hover)
+      font-size: 15pt
     &:disabled
-      background: #ad5f5f50 !important
-      color: #a1a1a190 !important
+      background: var(--var-buttons-disabled) !important
+      color: var(--var-buttons-disabled-font)

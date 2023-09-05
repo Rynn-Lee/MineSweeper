@@ -1,7 +1,7 @@
 import styles from '@styles/sidebar.module.sass'
 import { Toggle } from './UI'
 
-export default function Sidebar({setters, getters, toggles}: any){
+export default function Sidebar({setters, getters}: any){
   return(
     <div className={`${styles.sidebarWrapper}`} style={getters.openSettings ? {width: '100vw'} : {width: 'max-content'}}>
       <div className={styles.closingArea} style={getters.openSettings ? {display: 'block'} : {display: 'none'}} onClick={()=>setters.setOpenSettings(false)}/>

@@ -6,18 +6,16 @@ export const useObserver = (observable: any, storage: string, encode?: boolean) 
 
   useEffect(()=>{
     if(observable == latestData.current){return}
-    console.log(observable, latestData.current)
     !firstRender.current && assembleData()
     firstRender.current = false
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [observable])
 
   const assembleData = () => {
     const observableCopy = JSON.parse(JSON.stringify(observable))
-    console.log(observableCopy)
     const entries = Object.keys(observable)
     entries.map((item: any) => observableCopy[item] = encode ? encoder(observable[item]) : observable[item])
     localStorage.setItem(storage, JSON.stringify(observableCopy))
-    console.log(observableCopy)
   }
 
   const encoder = (data: any) => {

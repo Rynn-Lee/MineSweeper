@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from '@styles/applayout.module.sass'
 import BottomBar from "@/components/BottomBar";
 import Sidebar from "@/components/Sidebar";
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Loading from "@/components/Loading";
 import { useObserver } from "@/hooks/useObserver";
 
@@ -15,10 +15,6 @@ export default function AppLayout({children, setSettings, settings, toggles, set
     xpLeft: 0,
     lvl: 0,
     image: ''
-  })
-
-  useEffect(()=>{
-    console.log(userData)
   })
 
   const setters = {setOpenSettings, toggles, setSettings, setIsSetup, setUserData}

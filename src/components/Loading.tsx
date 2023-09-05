@@ -3,7 +3,7 @@ import { services } from '@/services'
 import { CountExperience } from '@/utils/CountExperience'
 import styles from '@styles/loading.module.sass'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 export default function Loading({setters, getters}: any){
   useEffect(()=>{
@@ -30,6 +30,7 @@ export default function Loading({setters, getters}: any){
     console.log(setts.userData)
     document.documentElement.setAttribute("dark-theme", `${setts.darkTheme}`);
     setTimeout(()=>setters.setIsSetup(), 100)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return(

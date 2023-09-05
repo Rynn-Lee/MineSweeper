@@ -9,10 +9,6 @@ export const localStorageService = {
       this.setItem(item, setTo)
       result = setTo
     }
-
-    if(typeof result == "string"){
-      return(result)
-    }
     return JSON.parse(result)
   },
   setItem(item: string, value: any){

@@ -5,9 +5,13 @@ import Sidebar from "@/components/Sidebar";
 import { useState } from 'react'
 import Loading from "@/components/Loading";
 import { useObserver } from "@/hooks/useObserver";
+import AccountSettings from "@/components/Bottombar/AccountSettings";
 
 export default function AppLayout({children, setSettings, settings, toggles, setIsSetup, isSetup}: any){
-  const [openSettings, setOpenSettings] = useState(false)
+  const [windows, setWindows] = useState({
+    settings: false,
+    account: false
+  })
   const [userData, setUserData] = useState({
     accountName: 'NewMinesweeper',
     experience: 0,
@@ -17,8 +21,8 @@ export default function AppLayout({children, setSettings, settings, toggles, set
     image: ''
   })
 
-  const setters = {setOpenSettings, toggles, setSettings, setIsSetup, setUserData}
-  const getters = {openSettings, settings, userData}
+  const setters = {setWindows, toggles, setSettings, setIsSetup, setUserData}
+  const getters = {windows, settings, userData}
   const observer = useObserver(userData, "userData", true)
 
   return(
@@ -35,6 +39,9 @@ export default function AppLayout({children, setSettings, settings, toggles, set
           setters={setters}
           getters={getters}/>
         {children}
+        <AccountSettings
+          getters={getters} 
+          setters={setters}/>
         <BottomBar
           setters={setters}
           getters={getters}/>

@@ -29,7 +29,6 @@ export default function Loading({setters, getters}: any){
         ...setts.userData
       })
     }
-    console.log(setts.userData)
     document.documentElement.setAttribute("dark-theme", `${setts.darkTheme}`);
     document.documentElement.setAttribute("transparency", `${setts.transparency}`);
     setTimeout(()=>setters.setIsSetup(), 100)

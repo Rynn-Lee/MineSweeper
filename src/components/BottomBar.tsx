@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import UserStats from './Bottombar/UserStats'
 
 export default function BottomBar({setters, getters}: any){
-  const [icon, setIcon] = useState(getters.isDarkTheme)
+  const [icon, setIcon] = useState(getters.isDarkTheme || assets.settingsLight)
   useEffect(()=>{
     getters.settings.darkTheme
       ? setIcon(assets.settingsLight)
@@ -16,7 +16,7 @@ export default function BottomBar({setters, getters}: any){
     <>
       <div className={styles.bottombar}>
         <div>
-          <span className={styles.icons} onClick={()=>setters.setOpenSettings(!getters.openSettings)}>
+          <span className={styles.icons} onClick={()=>setters.setWindows({...getters.windows, settings: !getters.windows.settings})}>
             <Image src={icon} alt="settings" width={20} height={20}/>
           </span>
         </div>

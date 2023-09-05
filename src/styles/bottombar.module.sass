@@ -2,6 +2,7 @@
   position: fixed
   bottom: 0px
   padding: 0px 20px 0px 8px
+  transition: var(--var-transition)
   left: 0px
   right: 0px
   display: flex
@@ -9,7 +10,7 @@
   align-items: center
   justify-content: space-between
   background: var(--var-interface-background)
-  backdrop-filter: blur(2px)
+  backdrop-filter: var(--var-backdrop-blur)
 
 .icons
   padding: 12px
@@ -66,3 +67,44 @@
       max-width: 200px
       word-break: break-all
       
+.accountSettingsWrapper
+  display: block
+  position: fixed
+  width: 100vw
+  height: 100vh
+  top: 0px
+  left: 0px
+.accountSettings
+  backdrop-filter: var(--var-backdrop-blur)
+  transition: var(--var-transition)
+  position: fixed
+  display: block
+  right: 0px
+  bottom: 44px
+  padding: 10px
+  width: 340px
+  background: var(--var-interface-background)
+  .section
+    flex-direction: column
+    display: flex
+    align-items: flex-start
+    justify-content: center
+    div
+      display: flex
+      flex-direction: row
+      width: 340px
+      input, button
+        background: var(--var-buttons-bg)
+        color: var(--var-font-color)
+        border: none
+        border-radius: 5px
+        outline: none
+        padding: 5px 5px
+        margin: 5px 2px
+      input
+        flex: 4
+      button
+        flex: 1
+        cursor: pointer
+.hideAccounts
+  right: -361px !important

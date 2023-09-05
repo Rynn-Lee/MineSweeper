@@ -11,7 +11,7 @@
   position: fixed
   top: 0px
   padding: 5px 0px
-  background: #30303050
+  background: var(--var-interface-background)
   width: 300px
   backdrop-filter: blur(2px)
   bottom: 44px
@@ -22,11 +22,11 @@
     display: block
     width: 280px
     text-align: center
-    font-size: 13pt
+    font-size: 12pt
     padding: 10px
   .option
     padding: 5px 10px
-    background: #30303090
+    background: var(--var-interface-background)
     display: flex
     flex-direction: row
     align-items: center
@@ -43,3 +43,19 @@
   top: 0px
   width: 100vw
   bottom: 44px
+
+.impact
+  color: var(--var-impact)
+  span
+    font-size: 8pt
+    padding: 0px 5px 0px 0px
+    color: var(--var-impact)
+
+.impact[data-impact="high"]
+  --var-impact: #ff4040
+.impact[data-impact="medium"]
+  --var-impact: #ffcc40
+.impact[data-impact="low"]
+  --var-impact: lightgreen
+.impact[data-impact="none"]
+  --var-impact: white

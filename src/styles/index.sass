@@ -6,6 +6,7 @@ html[dark-theme="false"]
   --var-buttons-bg-hover: #cccccc80
   --var-buttons-disabled: #cccccc80
   --var-buttons-disabled-font: #909090
+  --var-interface-background: #20202050
 
 html[dark-theme="true"]
   --var-bg-color: #131313
@@ -15,7 +16,31 @@ html[dark-theme="true"]
   --var-buttons-bg-hover: #50505080
   --var-buttons-disabled: #20202080
   --var-buttons-disabled-font: #cccccc50
-  
+  --var-interface-background: #30303050
+
+html[transparency="false"][dark-theme="false"]
+  --var-buttons-bg: #aaaaaa
+  --var-buttons-bg-hover: #cccccc
+  --var-buttons-disabled: #cccccc
+  --var-buttons-disabled-font: #909090
+  --var-interface-background: #cecece
+
+html[transparency="false"][dark-theme="true"]
+  --var-buttons-bg: #303030
+  --var-buttons-bg-hover: #505050
+  --var-buttons-disabled: #202020
+  --var-buttons-disabled-font: #cccccc
+  --var-interface-background: #202020
+
+[data-impact="high"]
+  --var-impact: #ff4040
+[data-impact="medium"]
+  --var-impact: #ffcc40
+[data-impact="low"]
+  --var-impact: lightgreen
+[data-impact="none"]
+  --var-impact: white
+
 :root
   --var-transition: 200ms
 

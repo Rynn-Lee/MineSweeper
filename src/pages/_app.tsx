@@ -9,6 +9,7 @@ interface settings {
   particles?: boolean | null
   darkTheme?: boolean | null
   background?: boolean | null
+  transparency?: boolean | null
 }
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -17,13 +18,15 @@ export default function App({ Component, pageProps }: AppProps) {
   const [settings, setSettings] = useState<settings>({
     particles: null,
     darkTheme: null,
-    background: null
+    background: null,
+    transparency: null
   })
 
   const [toggles] = useState({
     toggleParticles: ()=>setSettings((prevSettings) => ({...prevSettings, particles: toggle.toggle(prevSettings.particles, 'particles')})),
     toggleTheme: ()=>setSettings((prevSettings) => ({...prevSettings, darkTheme: toggle.toggle(prevSettings.darkTheme, 'darkTheme', 'dark-theme')})),
-    toggleBackground: ()=>setSettings((prevSettings) => ({...prevSettings, background: toggle.toggle(prevSettings.background, 'background')}))
+    toggleBackground: ()=>setSettings((prevSettings) => ({...prevSettings, background: toggle.toggle(prevSettings.background, 'background')})),
+    toggleTransparency: ()=>setSettings((prevSettings) => ({...prevSettings, transparency: toggle.toggle(prevSettings.transparency, 'transparency', 'transparency')}))
   })
 
   return(

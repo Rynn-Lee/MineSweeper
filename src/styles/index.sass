@@ -45,14 +45,19 @@ html[animations="false"]
   --var-impact: #ffcc40
 [data-impact="low"]
   --var-impact: lightgreen
-[data-impact="none"]
-  --var-impact: white
 
 
 @font-face 
   font-family: scp
   src: url("../assets/fonts/SourceCodePro-Regular.ttf")
   
+
+a
+  color: var(--var-font-color)
+  text-decoration: none
+  font-family: scp
+  letter-spacing: normal
+
 body
   font-family: scp
   transition: var(--var-transition)
@@ -65,3 +70,9 @@ body
   background: var(--var-bg-color)
   &>*
     user-select: none
+
+.content
+  position: relative
+  top: 0px
+  left: 0px
+  z-index: 2 !important

@@ -5,6 +5,8 @@ import { useObserver } from '@/hooks/useObserver'
 import { useToggles } from '@/hooks/useToggles'
 import { useState } from 'react'
 import '@/styles/index.sass'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useRouter } from 'next/router'
 
 interface settings {
   particles?: boolean | null
@@ -27,6 +29,7 @@ interface userData {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter()
   const toggle: any = useToggles()
   const [isSetup, setIsSetup] = useState(true)
   const [settings, setSettings] = useState<settings>({})
@@ -52,13 +55,36 @@ export default function App({ Component, pageProps }: AppProps) {
   const getters = {windows, settings, userData, isSetup}
   const observer = useObserver(userData, "userData", true)
 
+  const variants = {
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1
+    },
+    exit: {
+      opacity: 0
+    }
+  }
+
   return(
-    <AppLayout
-      toggles={toggles}
-      setters={setters}
-      getters={getters}>
-      {settings.particles ? <MemoizedParticles darkTheme={settings.darkTheme}/> : <></>}
-      <Component {...pageProps} />
-    </AppLayout>
+      <AppLayout
+        toggles={toggles}
+        setters={setters}
+        getters={getters}>
+        {settings.particles ? <MemoizedParticles darkTheme={settings.darkTheme}/> : <></>}
+        <AnimatePresence mode='wait' initial={false}>
+            <motion.div
+              transition={{duration: getters.settings.animations ? 0.1 : 0}}
+              key={router.route}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={variants}
+              className='content'>
+              <Component {...pageProps} />
+            </motion.div>
+        </AnimatePresence>
+      </AppLayout>
   )
 }

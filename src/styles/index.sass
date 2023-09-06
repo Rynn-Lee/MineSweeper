@@ -1,3 +1,7 @@
+:root
+  --var-transition: 200ms
+  --var-backdrop-blur: blur(2px)
+  
 html[dark-theme="false"]
   --var-bg-color: #eeeeee
   --var-bg: url("../assets/images/triangles-white.png")
@@ -19,7 +23,7 @@ html[dark-theme="true"]
   --var-interface-background: #30303050
 
 html[transparency="false"][dark-theme="false"]
-  --var-buttons-bg: #aaaaaa
+  --var-buttons-bg: #bbbbbb
   --var-buttons-bg-hover: #cccccc
   --var-buttons-disabled: #cccccc
   --var-buttons-disabled-font: #909090
@@ -32,6 +36,9 @@ html[transparency="false"][dark-theme="true"]
   --var-buttons-disabled-font: #cccccc
   --var-interface-background: #202020
 
+html[animations="false"]
+  --var-transition: none
+
 [data-impact="high"]
   --var-impact: #ff4040
 [data-impact="medium"]
@@ -41,9 +48,6 @@ html[transparency="false"][dark-theme="true"]
 [data-impact="none"]
   --var-impact: white
 
-:root
-  --var-transition: 200ms
-  --var-backdrop-blur: blur(2px)
 
 @font-face 
   font-family: scp

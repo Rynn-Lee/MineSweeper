@@ -13,6 +13,7 @@ export default function Loading({setters, getters}: any){
       darkTheme: services.localstorage.getItem('darkTheme', true),
       background: services.localstorage.getItem('background', true),
       transparency: services.localstorage.getItem('transparency', true),
+      animations: services.localstorage.getItem('animations', true),
       userData: services.enc.decodeObject(services.localstorage.getItem('userData'))
     }
     if(!getters.settings.darkTheme){
@@ -22,6 +23,7 @@ export default function Loading({setters, getters}: any){
         darkTheme: setts.darkTheme,
         background: setts.background,
         transparency: setts.transparency,
+        animations: setts.animations
       })
       setters.setUserData({
         ...getters.userData,
@@ -31,7 +33,8 @@ export default function Loading({setters, getters}: any){
     }
     document.documentElement.setAttribute("dark-theme", `${setts.darkTheme}`);
     document.documentElement.setAttribute("transparency", `${setts.transparency}`);
-    setTimeout(()=>setters.setIsSetup(), 100)
+    document.documentElement.setAttribute("animations", `${setts.animations}`);
+    setTimeout(()=>setters.setIsSetup(), 500)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

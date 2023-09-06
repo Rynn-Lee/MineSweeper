@@ -50,3 +50,25 @@
     &:disabled
       background: var(--var-buttons-disabled) !important
       color: var(--var-buttons-disabled-font)
+
+@media screen and (max-width: 1280px)
+  .logo
+    font-size: 15pt
+  .buttons
+    button
+      font-size: 10pt
+      padding: 10px 10px
+      width: 140px !important
+      &:enabled:hover
+        font-size: 12pt
+
+@media screen and (max-width: 900px)
+  .logo
+    font-size: 15pt
+  .buttons
+    button
+      font-size: 8pt
+      padding: 10px 5px
+      width: 100px !important
+      &:enabled:hover
+        font-size: 9pt

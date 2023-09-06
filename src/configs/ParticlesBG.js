@@ -2,8 +2,9 @@ import Particles from "react-tsparticles"
 import { loadFull } from "tsparticles"
 import ParticlesConfigLight from '@configs/particlesjs-config-light'
 import ParticlesConfigDark from '@configs/particlesjs-config-dark'
+import React from "react"
 
-export default function Particlesbg({darkTheme}){
+function Particlesbg({darkTheme}){
   const loadParticles = async (main) => await loadFull(main)
 
   return(
@@ -15,3 +16,5 @@ export default function Particlesbg({darkTheme}){
     </div>
   )
 }
+
+export const MemoizedParticles = React.memo(Particlesbg)

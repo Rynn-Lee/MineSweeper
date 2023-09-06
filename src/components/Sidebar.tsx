@@ -17,6 +17,10 @@ export default function Sidebar({setters, getters}: any){
           <span className={styles.impact}><span data-impact="low">••</span><Toggle state={getters.settings.transparency} fn={setters.toggles.toggleTransparency}/></span>
         </div>
         <div className={styles.option}>
+          <span>Animations</span>
+          <span className={styles.impact}><span data-impact="low">••</span><Toggle state={getters.settings.animations} fn={setters.toggles.toggleAnimations}/></span>
+        </div>
+        <div className={styles.option}>
           <span>Background Image</span>
           <span className={styles.impact}><span data-impact="none">•</span><Toggle state={getters.settings.background} fn={setters.toggles.toggleBackground}/></span>
         </div>

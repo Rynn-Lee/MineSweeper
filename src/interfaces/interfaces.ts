@@ -1,3 +1,5 @@
+import { NullLiteral } from "typescript"
+
 export namespace interfaces {
   export interface settings {
     particles?: boolean | null
@@ -5,6 +7,7 @@ export namespace interfaces {
     background?: boolean | null
     transparency?: boolean | null
     animations?: boolean | null
+    assets?: any
   }
   export interface userData {
     accountName?: string,
@@ -23,6 +26,7 @@ export namespace interfaces {
     height?: number | null
     multiplier?: number | null
     tossBombs?: boolean | null
+    mode?: boolean | null
   }
 }
 

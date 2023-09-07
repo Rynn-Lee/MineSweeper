@@ -1,4 +1,4 @@
-import styles from '@styles/index.module.sass'
+import styles from '@styles/pages/index.module.sass'
 import Link from 'next/link'
 
 export default function Home({getters, setters}: any) {
@@ -7,7 +7,7 @@ export default function Home({getters, setters}: any) {
       <div className={styles.line}>
         <div className={styles.logo}>MineSweeper Online <span className={styles.version}>v0.0.1</span></div>
         <div className={styles.buttons}>
-          <Link href="/lolpage"><button>Singleplayer</button></Link>
+          <Link href="/singleplayer/Gamesetup"><button>Singleplayer</button></Link>
           <button disabled>LAN</button>
           <button disabled>Multiplayer</button>
         </div>

@@ -1,4 +1,4 @@
-import { assets } from '@/assets/assets'
+import { lightAssets, darkAssets } from '@/assets/assets'
 import { services } from '@/services'
 import { CountExperience } from '@/utils/CountExperience'
 import styles from '@styles/loading.module.sass'
@@ -23,7 +23,8 @@ export default function Loading({setters, getters}: any){
         darkTheme: setts.darkTheme,
         background: setts.background,
         transparency: setts.transparency,
-        animations: setts.animations
+        animations: setts.animations,
+        assets: setts.darkTheme ? lightAssets : darkAssets
       })
       setters.setUserData({
         ...getters.userData,
@@ -40,7 +41,7 @@ export default function Loading({setters, getters}: any){
 
   return(
     <div className={`${styles.loading}`}>
-      <Image src={assets.loading} alt="loading" width={100} height={100} priority/>
+      {/* <Image src={getters.assets.loading} alt="loading" width={100} height={100} priority/> */}
     </div>
   )
 }

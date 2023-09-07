@@ -1,14 +1,15 @@
 import AppLayout from '@/layouts/AppLayout'
+import { lightAssets, darkAssets } from '@/assets/assets'
 import type { AppProps } from 'next/app'
 import { MemoizedParticles } from '@/configs/ParticlesBG'
-import { useObserver } from '@/hooks/useObserver'
+import { useRecorder } from '@/hooks/useRecorder'
 import { useToggles } from '@/hooks/useToggles'
 import React, { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { interfaces, dummyData } from '@interfaces/interfaces'
 import '@/styles/index.sass'
-
+import { useObserver } from '@/hooks/useObserver'
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -29,7 +30,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const getters = {windows, settings, userData, isSetup, gameSettings}
   const setters = {setWindows, toggles, setSettings, setIsSetup: ()=>setIsSetup(false), setUserData, setGameSettings}
-  const observer = useObserver(userData, "userData", true)
+  const recorder = useRecorder(userData, "userData", true)
+  const observer = useObserver(settings.darkTheme, ()=>setSettings((prevSettings) => ({...prevSettings, assets: settings.darkTheme ? lightAssets : darkAssets})))
 
   const variants = {
     initial: {

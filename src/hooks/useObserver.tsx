@@ -1,24 +1,8 @@
-import { useEffect, useRef } from "react"
+import { useEffect } from 'react'
 
-export const useObserver = (observable: any, storage: string, encode?: boolean) => {
-  const firstRender = useRef(true)
-  const latestData = useRef(observable)
-
+export const useObserver = (target: any, fn: Function) => {
   useEffect(()=>{
-    if(observable == latestData.current){return}
-    !firstRender.current && assembleData()
-    firstRender.current = false
+    fn()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [observable])
-
-  const assembleData = () => {
-    const observableCopy = JSON.parse(JSON.stringify(observable))
-    const entries = Object.keys(observable)
-    entries.map((item: any) => observableCopy[item] = encode ? encoder(observable[item]) : observable[item])
-    localStorage.setItem(storage, JSON.stringify(observableCopy))
-  }
-
-  const encoder = (data: any) => {
-    return btoa(JSON.stringify(data))
-  }
+  }, [target])
 }

@@ -1,7 +1,7 @@
 import styles from '@styles/index.module.sass'
 import Link from 'next/link'
 
-export default function Home() {
+export default function Home({getters, setters}: any) {
   return (
     <div className={styles.index}>
       <div className={styles.line}>

@@ -1,10 +1,10 @@
 import { assets } from '@/assets/assets'
 import styles from '@styles/bottombar.module.sass'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import UserStats from './Bottombar/UserStats'
 
-export default function BottomBar({setters, getters}: any){
+export default function BottomBarMemo({setters, getters}: any){
   const [icon, setIcon] = useState(getters.isDarkTheme || assets.settingsLight)
   useEffect(()=>{
     getters.settings.darkTheme
@@ -25,3 +25,5 @@ export default function BottomBar({setters, getters}: any){
     </>
   )
 }
+
+export const BottomBar = React.memo(BottomBarMemo)

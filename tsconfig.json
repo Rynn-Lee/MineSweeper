@@ -15,11 +15,12 @@
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@styles/*": ["./src/styles/*"],
+      "@styles/*": ["./src/styles/*"],  
       "@configs/*": ["./src/configs/*"],
       "@components/*": ["./src/components/*"],
       "@assets/*": ["./src/assets/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@interfaces/*": ["./src/interfaces/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/ParticlesBackground.js", "src/configs/ParticlesBG.js"],

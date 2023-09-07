@@ -3,45 +3,21 @@ import type { AppProps } from 'next/app'
 import { MemoizedParticles } from '@/configs/ParticlesBG'
 import { useObserver } from '@/hooks/useObserver'
 import { useToggles } from '@/hooks/useToggles'
-import { useState } from 'react'
-import '@/styles/index.sass'
+import React, { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/router'
+import { interfaces, dummyData } from '@interfaces/interfaces'
+import '@/styles/index.sass'
 
-interface settings {
-  particles?: boolean | null
-  darkTheme?: boolean | null
-  background?: boolean | null
-  transparency?: boolean | null
-  animations?: boolean | null
-}
-interface windows {
-  settings?: boolean | null
-  account?: boolean | null
-}
-interface userData {
-  accountName?: string,
-  experience?: number,
-  xpNeeded?: number,
-  xpLeft?: number,
-  lvl?: number,
-  image?: string
-}
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const toggle: any = useToggles()
   const [isSetup, setIsSetup] = useState(true)
-  const [settings, setSettings] = useState<settings>({})
-  const [windows, setWindows] = useState<windows>({})
-  const [userData, setUserData] = useState<userData>({
-    accountName: 'NewMineSweeper',
-    experience: 0,
-    xpNeeded: 100,
-    xpLeft: 0,
-    lvl: 1,
-    image: ''
-  })
+  const [settings, setSettings] = useState<interfaces.settings>({})
+  const [windows, setWindows] = useState<interfaces.windows>({})
+  const [gameSettings, setGameSettings] = useState<interfaces.gameSettings>({})
+  const [userData, setUserData] = useState<interfaces.userData>(dummyData.userData)
 
   const [toggles] = useState({
     toggleParticles: ()=>setSettings((prevSettings) => ({...prevSettings, particles: toggle.toggle(prevSettings.particles, 'particles')})),
@@ -51,8 +27,8 @@ export default function App({ Component, pageProps }: AppProps) {
     toggleAnimations: ()=>setSettings((prevSettings) => ({...prevSettings, animations: toggle.toggle(prevSettings.animations, 'animations', 'animations')}))
   })
 
-  const setters = {setWindows, toggles, setSettings, setIsSetup: ()=>setIsSetup(false), setUserData}
-  const getters = {windows, settings, userData, isSetup}
+  const getters = {windows, settings, userData, isSetup, gameSettings}
+  const setters = {setWindows, toggles, setSettings, setIsSetup: ()=>setIsSetup(false), setUserData, setGameSettings}
   const observer = useObserver(userData, "userData", true)
 
   const variants = {
@@ -80,9 +56,8 @@ export default function App({ Component, pageProps }: AppProps) {
               initial="initial"
               animate="animate"
               exit="exit"
-              variants={variants}
-              className='content'>
-              <Component {...pageProps} />
+              variants={variants}>
+              <Component {...pageProps} getters={getters} setters={setters}/>
             </motion.div>
         </AnimatePresence>
       </AppLayout>

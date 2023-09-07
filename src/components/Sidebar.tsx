@@ -1,7 +1,8 @@
 import styles from '@styles/sidebar.module.sass'
 import { Toggle } from './UI'
+import React from 'react'
 
-export default function Sidebar({setters, getters}: any){
+export default function SidebarMemo({setters, getters}: any){
   return(
     <div className={`${styles.sidebarWrapper}`} style={getters.windows.settings ? {width: '100vw'} : {width: 'max-content'}}>
       <div className={styles.closingArea} style={getters.windows.settings ? {display: 'block'} : {display: 'none'}} onClick={()=>setters.setWindows({...getters.windows, settings: false})}/>
@@ -32,3 +33,6 @@ export default function Sidebar({setters, getters}: any){
     </div>
   )
 }
+
+
+export const Sidebar = React.memo(SidebarMemo)

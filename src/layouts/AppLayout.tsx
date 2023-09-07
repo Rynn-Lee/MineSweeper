@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from '@styles/applayout.module.sass'
-import BottomBar from "@/components/BottomBar";
-import Sidebar from "@/components/Sidebar";
+import { BottomBar } from "@/components/BottomBar";
+import { Sidebar } from "@/components/Sidebar";
 import Loading from "@/components/Loading";
 import AccountSettings from "@/components/Bottombar/AccountSettings";
 

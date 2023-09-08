@@ -1,5 +1,5 @@
 import styles from '@styles/ui.module.sass'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 export function Toggle({state, fn}: any){
   return(
@@ -35,6 +35,17 @@ export function StepToggle({initial, from, to, by, fn}: any){
 
   return(
     <button className={styles.toggle} onClick={stepUp} onContextMenuCapture={(e)=>{e.preventDefault(); stepDown}}>{step.current}</button>
+  )
+}
+
+export function Choose({initial, variants}: any){
+  const [chooseVariant, setChooseVariant] = useState(variants[initial])
+  return(
+    <div>
+      {variants.map((item: any)=>(
+        <span key={item} style={{padding: "5px 10px", background: `var(--var-buttons-bg)`, borderRadius: "10px", margin: "0px 5px"}}>{item}</span>
+      ))}
+    </div>
   )
 }
 

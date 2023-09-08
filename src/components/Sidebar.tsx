@@ -1,10 +1,8 @@
 import styles from '@styles/sidebar.module.sass'
-import { StepToggle, Toggle } from './UI'
+import { Toggle } from './UI'
 import React from 'react'
 
 export default function SidebarMemo({setters, getters}: any){
-  const changeScale = (scale: number) => setters.toggles.toggleScale(scale)
-
   return(
     <div className={`${styles.sidebarWrapper}`} style={getters.windows.settings ? {width: '100vw'} : {width: 'max-content'}}>
       <div className={styles.closingArea} style={getters.windows.settings ? {display: 'block'} : {display: 'none'}} onClick={()=>setters.setWindows({...getters.windows, settings: false})}/>
@@ -31,8 +29,6 @@ export default function SidebarMemo({setters, getters}: any){
           <span>Dark Theme</span>
           <span className={styles.impact}><Toggle state={getters.settings.darkTheme} fn={setters.toggles.toggleTheme}/></span>
         </div>
-
-        
         <span className={styles.title}>INTERFACE</span>
         <div className={styles.option}>
           <span>Language</span>

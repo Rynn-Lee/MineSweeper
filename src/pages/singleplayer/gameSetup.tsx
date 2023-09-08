@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from '@styles/pages/gamesetup.module.sass'
 import Image from "next/image";
+import { Choose } from "@/components/UI";
 
 export default function Gamesetup({setters, getters}: any){
   return(
@@ -13,7 +14,7 @@ export default function Gamesetup({setters, getters}: any){
             *The higher bomb multiplier is, the more exp you get revealing empty cells, but the more bombs there are
           </div>
           <div className={styles.setup}>
-            ba
+            <span>Field: <Choose initial={0} variants={["5x5", "10x10", "15x15", "20x20", "25x25"]}/> </span>
           </div>
         </div>
       </div>

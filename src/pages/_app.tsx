@@ -35,10 +35,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const variants = {
     initial: {
-      opacity: 0
+      opacity: 0,
     },
     animate: {
-      opacity: 1
+      opacity: 1,
     },
     exit: {
       opacity: 0

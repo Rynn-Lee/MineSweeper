@@ -1,0 +1,1 @@
+All the experience died player gained, gets divided by alive players and adds to their exp

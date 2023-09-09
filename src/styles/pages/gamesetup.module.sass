@@ -20,7 +20,7 @@
 
 .wrapper
   width: 100%
-  max-width: 1366px
+  max-width: 1600px
   display: flex
   flex-direction: row
 
@@ -49,10 +49,44 @@
 
 .description
   flex: 1
+  border: none
 .setup
+  border: none
+  border-left: 1px var(--var-buttons-bg) solid
+  border-right: 1px var(--var-buttons-bg) solid
   display: flex
   flex-direction: column
   flex: 2
-  div
+  div, span, table
     display: flex
+    align-items: center
     flex-direction: row
+    margin: 5px 0px
+    width: 400px
+.settings
+  border: none
+  flex: 1
+  display: flex
+  flex-direction: column
+
+.select, .input
+  box-sizing: border-box
+  width: 200px
+  background: var(--var-buttons-bg)
+  color: var(--var-font-color)
+  padding: 5px 10px
+  border: none
+  border-radius: 10px
+  outline: none
+
+.startGame
+  cursor: pointer
+  background: var(--var-buttons-bg)
+  color: var(--var-font-color)
+  padding: 15px 20px
+  border: none
+  border-radius: 10px
+  width: 200px
+  transition: var(--var-transition)
+  &:hover
+    background: var(--var-buttons-bg-hover)

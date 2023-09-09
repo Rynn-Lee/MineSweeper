@@ -1,0 +1,56 @@
+.singleplayer
+  position: fixed
+  width: 100vw
+  bottom: 44px
+  top: 0px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  padding: 0px
+  margin: 0px
+
+.window
+  position: relative
+  backdrop-filter: var(--var-backdrop-blur)
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+  padding: 0px
+  margin: 0px
+  height: 100vh
+  width: 100%
+  transition: var(--var-transition)
+  background: var(--var-interface-background)
+
+.top
+  backdrop-filter: var(--var-backdrop-blur)
+  z-index: 4
+  display: flex
+  position: relative
+  padding: 6px
+  background: var(--var-buttons-bg)
+  transition: var(--var-transition)
+  justify-content: center
+  a
+    display: flex
+    align-items: center
+    justify-content: center
+    position: absolute
+    top: 0px
+    left: 0px
+    padding: 6px 12px
+    transition: var(--var-transition)
+    background: var(--var-buttons-bg)
+    &:hover
+      background: var(--var-buttons-bg-hover)
+
+.cell
+  margin: 1px
+  width: 40px
+  height: 40px
+  background: var(--var-buttons-bg)
+  display: block
+  transition: var(--var-transition)
+  &:hover
+    background: var(--var-buttons-bg-hover)

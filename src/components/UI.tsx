@@ -38,12 +38,28 @@ export function StepToggle({initial, from, to, by, fn}: any){
   )
 }
 
-export function Choose({initial, variants}: any){
-  const [chooseVariant, setChooseVariant] = useState(variants[initial])
+export function ChooseField({initial, variants, fn, mode}: any){
+  const [chooseVariant, setChooseVariant] = useState({button: initial, text: variants[initial]})
+  useEffect(()=>{
+    const split = chooseVariant.text.toString().split('x')
+    mode == "field" ? fn(split[0], split[1]) : fn(split[1])
+  }, [chooseVariant])
+  
   return(
     <div>
-      {variants.map((item: any)=>(
-        <span key={item} style={{padding: "5px 10px", background: `var(--var-buttons-bg)`, borderRadius: "10px", margin: "0px 5px"}}>{item}</span>
+      {variants.map((item: any, index: number)=>(
+        <span
+          key={index}
+          style={
+            { padding: "5px 10px",
+              borderRadius: "10px", margin: "0px 5px",
+              background: chooseVariant.button == index ? "#aaaaaa90" : `var(--var-buttons-bg)`,
+              display: 'flex',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'var(--var-transition)'
+            }}
+            onClick={()=>setChooseVariant({button: index, text: item})}>{item}</span>
       ))}
     </div>
   )

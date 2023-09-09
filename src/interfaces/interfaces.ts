@@ -1,5 +1,3 @@
-import { NullLiteral } from "typescript"
-
 export namespace interfaces {
   export interface settings {
     particles?: boolean | null
@@ -22,11 +20,12 @@ export namespace interfaces {
     account?: boolean | null
   }
   export interface gameSettings {
-    width?: number | null
-    height?: number | null
+    x?: number | null
+    y?: number | null
     multiplier?: number | null
     tossBombs?: boolean | null
-    mode?: boolean | null
+    mode?: string | null
+    field?: any
   }
 }
 
@@ -38,5 +37,12 @@ export const dummyData = {
     xpLeft: 0,
     lvl: 1,
     image: ''
+  },
+  gameSettings: {
+    x: 5,
+    y: 5,
+    multiplier: 1,
+    tossBombs: false,
+    mode: 'singleplayer'
   }
 }

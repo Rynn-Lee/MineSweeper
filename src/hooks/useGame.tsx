@@ -1,14 +1,25 @@
-export const useGame = (settings: any) => {
+import { useEffect, useState } from 'react'
+
+export const useGame = () => {
+  const [field, setField] = useState()
+  const [gameSettings, setGameSettings] = useState({
+    x: 10,
+    y: 10,
+    multiplier: 1,
+    tossBombs: false,
+    mode: 'singleplayer',
+    revealEmpty: true
+  })
+
   const create = () =>{
-    const bombsAmount = Math.round((settings.multiplier / 10) * ((settings.x-0.5) * (settings.y-0.5)))
-    console.log(bombsAmount);
-    const field = Array.from(Array(settings.x), () => Array(settings.y).fill({
+    const bombsAmount = Math.round((gameSettings.multiplier / 10) * ((gameSettings.x-0.5) * (gameSettings.y-0.5)))
+    const field = Array.from(Array(gameSettings.x), () => Array(gameSettings.y).fill({
       clicked: false,
       isBomb: false,
       bombsAround: 0,
       markedAsBomb: false
     }))
-    return filler(field, bombsAmount)
+    setField(filler(field, bombsAmount))
   }
 
   const filler = (field: any, bombsAmount: number) => {
@@ -24,10 +35,13 @@ export const useGame = (settings: any) => {
     return result
   }
 
-  
-  const randomizer = () => {
-    return {x: Math.floor(Math.random() * settings.x),y: Math.floor(Math.random() * settings.y),}
+  const set = (values: any) => {
+    setGameSettings({...gameSettings, ...values})
   }
 
-  return {create}
+  const randomizer = () => {
+    return {x: Math.floor(Math.random() * gameSettings.x), y: Math.floor(Math.random() * gameSettings.y),}
+  }
+
+  return {create, field, set, gameSettings}
 }

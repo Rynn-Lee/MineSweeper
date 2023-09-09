@@ -6,6 +6,8 @@ export namespace interfaces {
     transparency?: boolean | null
     animations?: boolean | null
     assets?: any
+    slidingField?: boolean | null
+    fieldBouncing?: number | null
   }
   export interface userData {
     accountName?: string,

@@ -7,7 +7,7 @@ export function Toggle({state, fn}: any){
   )
 }
 
-export function StepToggle({initial, from, to, by, fn}: any){
+export function StepToggle({initial, from, to, by, fn, substract}: any){
   const step = useRef(initial)
   const stepUp = () => {
     if((step.current + by) > to){
@@ -16,7 +16,7 @@ export function StepToggle({initial, from, to, by, fn}: any){
     else{
       step.current = step.current + by
     }
-    fn(step.current)
+    fn(Number(step.current))
   }
   const stepDown = () => {
     if((step.current - by) < from){
@@ -25,16 +25,15 @@ export function StepToggle({initial, from, to, by, fn}: any){
     else{
       step.current = step.current - by
     }
-    fn(step.current)
+    fn(Number(step.current))
   }
 
-  useEffect(()=>{
-    !step.current && (step.current = initial)
-    console.log('called')
-  }, [initial])
+  // useEffect(()=>{
+  //   !step.current && (step.current = initial)
+  // }, [initial])
 
   return(
-    <button className={styles.toggle} onClick={stepUp} onContextMenuCapture={(e)=>{e.preventDefault(); stepDown}}>{step.current}</button>
+    <button className={styles.toggle} onClick={stepUp} onContextMenuCapture={(e)=>{e.preventDefault(); stepDown}}>{substract ? to - step.current : step.current}</button>
   )
 }
 

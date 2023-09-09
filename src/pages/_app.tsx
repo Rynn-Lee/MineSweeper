@@ -16,28 +16,29 @@ export default function App({ Component, pageProps }: AppProps) {
   const [isSetup, setIsSetup] = useState(true)
   const [settings, setSettings] = useState<interfaces.settings>({})
   const [windows, setWindows] = useState<interfaces.windows>({})
-  const [gameSettings, setGameSettings] = useState<interfaces.gameSettings>(dummyData.gameSettings)
   const [userData, setUserData] = useState<interfaces.userData>(dummyData.userData)
   const router = useRouter()
   const toggle: any = useToggles()
-  const game = useGame(gameSettings)
+  const game = useGame()
 
   const [toggles] = useState({
     toggleParticles: ()=>setSettings((prevSettings) => ({...prevSettings, particles: toggle.toggle(prevSettings.particles, 'particles')})),
     toggleTheme: ()=>setSettings((prevSettings) => ({...prevSettings, darkTheme: toggle.toggle(prevSettings.darkTheme, 'darkTheme', 'dark-theme')})),
     toggleBackground: ()=>setSettings((prevSettings) => ({...prevSettings, background: toggle.toggle(prevSettings.background, 'background')})),
     toggleTransparency: ()=>setSettings((prevSettings) => ({...prevSettings, transparency: toggle.toggle(prevSettings.transparency, 'transparency', 'transparency')})),
-    toggleAnimations: ()=>setSettings((prevSettings) => ({...prevSettings, animations: toggle.toggle(prevSettings.animations, 'animations', 'animations')}))
+    toggleAnimations: ()=>setSettings((prevSettings) => ({...prevSettings, animations: toggle.toggle(prevSettings.animations, 'animations', 'animations')})),
+    toggleSlidingField: ()=>setSettings((prevSettings) => ({...prevSettings, slidingField: toggle.toggle(prevSettings.slidingField, 'slidingField', 'slidingField')})),
+    toggleFieldBouncing: (newValue: number)=>setSettings((prevSettings) => ({...prevSettings, fieldBouncing: toggle.update('fieldBouncing', newValue)}))
   })
 
-  const getters = {windows, settings, userData, isSetup, gameSettings}
-  const setters = {setWindows, toggles, setSettings, setIsSetup: ()=>setIsSetup(false), setUserData, setGameSettings, game}
+  const getters = {windows, settings, userData, isSetup, game}
+  const setters = {setWindows, toggles, setSettings, setIsSetup: ()=>setIsSetup(false), setUserData, game}
   const recorder = useRecorder(userData, "userData", true)
   const observer = useObserver(settings.darkTheme, ()=>setSettings((prevSettings) => ({...prevSettings, assets: settings.darkTheme ? lightAssets : darkAssets})))
 
   useEffect(()=>{
-    console.log(gameSettings)
-  }, [gameSettings])
+    console.log(settings)
+  }, [settings])
 
   const variants = {
     initial: {

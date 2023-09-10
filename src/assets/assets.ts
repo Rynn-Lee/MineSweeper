@@ -6,6 +6,8 @@ import checkLight from './icons/check-light.svg'
 import checkDark from './icons/check-dark.svg'
 import arrowLeftDark from './icons/arrow-left-dark.svg'
 import arrowLeftLight from './icons/arrow-left-light.svg'
+import bombLight from './icons/bomb-light.svg'
+import bombDark from './icons/bomb-dark.svg'
 
 export const lightAssets = {
   codeIco,
@@ -13,6 +15,7 @@ export const lightAssets = {
   settings: settingsLight,
   check :checkLight,
   arrowLeft: arrowLeftLight,
+  bomb: bombLight
 }
 
 export const darkAssets = {
@@ -21,4 +24,5 @@ export const darkAssets = {
   settings: settingsDark,
   check :checkDark,
   arrowLeft: arrowLeftDark,
+  bomb: bombDark
 }

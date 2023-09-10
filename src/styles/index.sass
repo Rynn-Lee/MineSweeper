@@ -1,6 +1,7 @@
 :root
   --var-transition: 200ms
   --var-backdrop-blur: blur(2px)
+  --var-field-cells-clicked: none
 
 html[dark-theme="false"]
   --var-bg-color: #eeeeee
@@ -11,6 +12,38 @@ html[dark-theme="false"]
   --var-buttons-disabled: #cccccc80
   --var-buttons-disabled-font: #909090
   --var-interface-background: #bbbbbbaa
+  --var-field-bg: #bbbbbbaa
+  --var-field-cells: #eaeaea
+  // --var-field-cells-clicked: #d4d4d4
+  --var-field-cells-hover: #b4b4b4
+  
+  [data-bombs="0"]
+    --var-bombs-color: var(--var-field-cells-clicked)
+  [data-bombs="1"]
+    --var-bombs-color: #a8ff8e
+  [data-bombs="2"]
+    --var-bombs-color: #eeff8e
+  [data-bombs="3"]
+    --var-bombs-color: #ffbb8e
+  [data-bombs="4"]
+    --var-bombs-color: #ff8e8e
+  [data-bombs="5"]
+    --var-bombs-color: #ff8ebd
+  [data-bombs="6"]
+    --var-bombs-color: #b98eff
+  [data-bombs="7"]
+    --var-bombs-color: #908eff
+  [data-bombs="8"]
+    --var-bombs-color: #8355cc
+  [data-bombs="9"]
+    --var-bombs-color: #da3939
+
+  [transparency="false"]
+    --var-buttons-bg: #bbbbbb
+    --var-buttons-bg-hover: #cccccc
+    --var-buttons-disabled: #cccccc
+    --var-buttons-disabled-font: #909090
+    --var-interface-background: #cecece
 
 html[dark-theme="true"]
   --var-bg-color: #131313
@@ -21,26 +54,43 @@ html[dark-theme="true"]
   --var-buttons-disabled: #20202080
   --var-buttons-disabled-font: #cccccc50
   --var-interface-background: #30303050
+  --var-field-bg: #303030aa
+  --var-field-cells: #404040
+  // --var-field-cells-clicked: #353535
+  --var-field-cells-hover: #313131
+  
+  [data-bombs="0"]
+    --var-bombs-color: var(--var-field-cells-clicked)
+  [data-bombs="1"]
+    --var-bombs-color: #6fa75e
+  [data-bombs="2"]
+    --var-bombs-color: #a8b463
+  [data-bombs="3"]
+    --var-bombs-color: #aa7c5e
+  [data-bombs="4"]
+    --var-bombs-color: #a15b5b
+  [data-bombs="5"]
+    --var-bombs-color: #9c5774
+  [data-bombs="6"]
+    --var-bombs-color: #6f5499
+  [data-bombs="7"]
+    --var-bombs-color: #58579b
+  [data-bombs="8"]
+    --var-bombs-color: #4e3479
+  [data-bombs="9"]
+    --var-bombs-color: #742020
 
-html[transparency="false"][dark-theme="false"]
-  --var-buttons-bg: #bbbbbb
-  --var-buttons-bg-hover: #cccccc
-  --var-buttons-disabled: #cccccc
-  --var-buttons-disabled-font: #909090
-  --var-interface-background: #cecece
-
-html[transparency="false"][dark-theme="true"]
-  --var-buttons-bg: #303030
-  --var-buttons-bg-hover: #505050
-  --var-buttons-disabled: #202020
-  --var-buttons-disabled-font: #cccccc
-  --var-interface-background: #202020
+  [transparency="false"]
+    --var-buttons-bg: #303030
+    --var-buttons-bg-hover: #505050
+    --var-buttons-disabled: #202020
+    --var-buttons-disabled-font: #cccccc
+    --var-interface-background: #202020
 
 html[transparency="false"]
   --var-gamepage-bg: none
 html[transparency="true"]
   --var-gamepage-bg: var(--var-interface-background)
-
 html[animations="false"]
   --var-transition: none
 
@@ -50,7 +100,6 @@ html[animations="false"]
   --var-impact: #ffcc40
 [data-impact="low"]
   --var-impact: lightgreen
-
 
 @font-face 
   font-family: scp

@@ -52,11 +52,18 @@
   margin: 1px
   width: 40px
   height: 40px
-  background: var(--var-buttons-bg)
-  display: block
+  background: var(--var-field-cells)
+  display: flex
+  justify-content: center
+  align-items: center
   transition: var(--var-transition)
   &:hover
-    background: var(--var-buttons-bg-hover)
+    background: var(--var-field-cells-hover)
 
 .field
   display: flex
+  padding: 20px
+  background: var(--var-field-bg)
+
+.clickedCell
+  background: var(--var-bombs-color)

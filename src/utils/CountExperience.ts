@@ -1,4 +1,5 @@
 export const CountExperience = (data: any) => {
+  console.log(data)
   let lvl = {
     xpLeft: data,
     xpNeeded: 100,

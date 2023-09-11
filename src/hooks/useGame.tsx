@@ -15,7 +15,7 @@ export const useGame = (fn: any) => {
   })
   const player = useRef({
     exp: 0,
-    clicked: 0
+    clicked: 1
   })
 
   const create = () =>{
@@ -26,9 +26,11 @@ export const useGame = (fn: any) => {
       bombsAround: 0,
       markedAsBomb: false
     }))
-    set({totalBombs: bombsAmount})
-    set({cells: (gameSettings.x*gameSettings.y)-bombsAmount})
-    set({xpPerCell: gameSettings.multiplier * (gameSettings.x + gameSettings.y)})
+    set({
+      totalBombs: bombsAmount,
+      cells: (gameSettings.x*gameSettings.y)-bombsAmount,
+      xpPerCell: gameSettings.multiplier * (gameSettings.x + gameSettings.y)
+    })
     setField(filler(field, bombsAmount))
   }
 
@@ -51,39 +53,33 @@ export const useGame = (fn: any) => {
 
   const click = (x: number, y: number) => {
     const newArr = JSON.parse(JSON.stringify(field))
+    
+    newArr[x][y].isBomb
+      ? bombed(newArr, x, y)
+      : !newArr[x][y].clicked && (player.current = {...addExp(newArr, x, y)})
 
-    player.current = {
-      exp: player.current.exp + gameSettings.xpPerCell,
-      clicked: !newArr[x][y].clicked ? player.current.clicked += 1 : player.current.clicked
-    }
-
-    newArr[x][y].clicked = true
-    newArr[x][y].bombsAround = newArr[x][y].isBomb ? newArr[x][y].bombsAround = 9 : countBombsAround(x, y)
-
-    if(newArr[x][y].isBomb){
-      player.current = {
-        exp: 0,
-        clicked: 0
-      }
-    }
-
-    if(player.current.clicked == gameSettings.cells){
-      fn(player.current.exp)
-      player.current = {
-        exp: 0,
-        clicked: 0
-      }
-      console.log("set")
-    }
-
-    if(!gameSettings.revealEmpty){
-      setField(newArr)
-      return
-    }
+    setField(newArr)
   }
 
-  const add = () => {
-    fn(400)
+  const bombed = (newArr: any, x: number, y: number) => {
+    newArr[x][y].clicked = true
+    newArr[x][y].bombsAround = 9
+    player.current = {exp: 0, clicked: 1}
+  }
+
+  const addExp = (newArr: any, x: number, y: number) => {
+    newArr[x][y].clicked = true
+    newArr[x][y].bombsAround = countBombsAround(x, y)
+    player.current.clicked == gameSettings.cells && playerWin()
+    return {
+      exp: player.current.exp + gameSettings.xpPerCell,
+      clicked: player.current.clicked + 1
+    }
+  }
+  
+  const playerWin = () => {
+    fn(player.current.exp)
+    player.current = {exp: 0, clicked: 1}
   }
 
   const countBombsAround = (x: number, y: number) => {
@@ -100,9 +96,7 @@ export const useGame = (fn: any) => {
     return counter
   }
 
-  const randomizer = () => {
-    return {x: Math.floor(Math.random() * gameSettings.x), y: Math.floor(Math.random() * gameSettings.y),}
-  }
+  const randomizer = () => ({x: Math.floor(Math.random() * gameSettings.x), y: Math.floor(Math.random() * gameSettings.y)})
 
-  return {create, field, set, gameSettings, click, add}
+  return {create, field, set, gameSettings, click}
 }

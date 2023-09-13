@@ -54,11 +54,23 @@ export const useGame = (fn: any) => {
   const click = async(x: number, y: number) => {
     const newArr = JSON.parse(JSON.stringify(field))
     
+    const ifContinue = async() => {
+      const bombsAround = await countBombsAround(x, y)
+      console.log(bombsAround)
+      if(!bombsAround){
+        await recursion(x, y, newArr)
+      }
+      else{
+        newArr[x][y].clicked = true
+        newArr[x][y].bombsAround = bombsAround
+      }
+    }
+
     newArr[x][y].clicked = true
     newArr[x][y].isBomb
       ? bombed(newArr, x, y)
       : gameSettings.revealEmpty
-        ? await recursion(x, y, newArr)
+        ? await ifContinue()
         : await countBombsAround(x, y, newArr)
       // : !newArr[x][y].clicked && (player.current = {...await addExp(newArr, x, y)})
 

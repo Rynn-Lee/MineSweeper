@@ -54,6 +54,7 @@ export const useGame = (fn: any) => {
   const click = (x: number, y: number) => {
     const newArr = JSON.parse(JSON.stringify(field))
     
+    console.log(x,y)
     newArr[x][y].isBomb
       ? bombed(newArr, x, y)
       : !newArr[x][y].clicked && (player.current = {...addExp(newArr, x, y)})
@@ -69,7 +70,7 @@ export const useGame = (fn: any) => {
 
   const addExp = (newArr: any, x: number, y: number) => {
     newArr[x][y].clicked = true
-    newArr[x][y].bombsAround = countBombsAround(x, y)
+    newArr[x][y].bombsAround = countBombsAround(x, y, newArr, true)
     player.current.clicked == gameSettings.cells && playerWin()
     return {
       exp: player.current.exp + gameSettings.xpPerCell,
@@ -82,13 +83,22 @@ export const useGame = (fn: any) => {
     player.current = {exp: 0, clicked: 1}
   }
 
-  const countBombsAround = (x: number, y: number) => {
+  const countBombsAround = (x: number, y: number, newArr: any, withRecursion?: boolean) => {
     let xOffset = x-1, yOffset = y-1
     let counter = 0
+    let i = 0
     while(xOffset <= x+1){
       while(yOffset <= y+1){
         if(field[xOffset]?.[yOffset]?.isBomb){counter += 1}
         yOffset+=1
+        if(counter){break}
+        if(!counter && newArr[xOffset]?.[yOffset] && !newArr[xOffset]?.[yOffset].clicked && !newArr[x][y].isBomb){
+          newArr[x][y].clicked = true
+          countBombsAround(xOffset, yOffset, newArr, true)
+        }
+        // if(!withRecursion && newArr[xOffset]?.[yOffset]){
+        //   countBombsAround(xOffset, yOffset, newArr, false)
+        // }
       }
       yOffset=y-1
       xOffset+=1

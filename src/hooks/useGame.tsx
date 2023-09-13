@@ -51,13 +51,16 @@ export const useGame = (fn: any) => {
     setGameSettings((prevValues: any)=>({...prevValues, ...values}))
   }
 
-  const click = (x: number, y: number) => {
+  const click = async(x: number, y: number) => {
     const newArr = JSON.parse(JSON.stringify(field))
     
-    console.log(x,y)
+    newArr[x][y].clicked = true
     newArr[x][y].isBomb
       ? bombed(newArr, x, y)
-      : !newArr[x][y].clicked && (player.current = {...addExp(newArr, x, y)})
+      : gameSettings.revealEmpty
+        ? await recursion(x, y, newArr)
+        : await countBombsAround(x, y, newArr)
+      // : !newArr[x][y].clicked && (player.current = {...await addExp(newArr, x, y)})
 
     setField(newArr)
   }
@@ -68,9 +71,8 @@ export const useGame = (fn: any) => {
     player.current = {exp: 0, clicked: 1}
   }
 
-  const addExp = (newArr: any, x: number, y: number) => {
-    newArr[x][y].clicked = true
-    newArr[x][y].bombsAround = countBombsAround(x, y, newArr, gameSettings.revealEmpty)
+  const addExp = async (newArr: any, x: number, y: number) => {
+    newArr[x][y].bombsAround = await countBombsAround(x, y)
     player.current.clicked == gameSettings.cells && playerWin()
     return {
       exp: player.current.exp + gameSettings.xpPerCell,
@@ -83,40 +85,64 @@ export const useGame = (fn: any) => {
     player.current = {exp: 0, clicked: 1}
   }
 
-  const countBombsAround = (x: number, y: number, newArr: any, withRecursion?: boolean) => {
+  const countBombsAround = async(x: number, y: number, newArr?: any) => {
     let xOffset = x-1, yOffset = y-1
     let counter = 0
     while(xOffset <= x+1){
       while(yOffset <= y+1){
         if(field[xOffset]?.[yOffset]?.isBomb){counter += 1}
-        // if(counter){break}
-        if(newArr[xOffset]?.[yOffset] && !counter && !newArr[xOffset][yOffset].clicked && withRecursion){
-          let nextCellBombs = countBombsAround(xOffset, yOffset, newArr)
-          if(nextCellBombs || newArr[xOffset][yOffset].isBomb){
-            if(newArr[xOffset][yOffset].isBomb){break}
-            newArr[xOffset][yOffset].bombsAround = nextCellBombs
-            newArr[xOffset][yOffset].clicked = true
-            break
+        yOffset+=1
+      }
+      yOffset=y-1
+      xOffset+=1
+    }
+    newArr && (newArr[x][y].bombsAround = counter)
+    return counter
+  }
+
+  const recursion = async(x: number, y: number, newArr: any) => {
+    let xOffset = x-1, yOffset = y-1
+    while(xOffset <= x+1){
+      while(yOffset <= y+1){
+        const bombsAround = await countBombsAround(xOffset, yOffset)
+        if(newArr[xOffset]?.[yOffset]){
+          if(bombsAround){
+            newArr[xOffset][yOffset].bombsAround = newArr[xOffset][yOffset].isBomb ? 9 : bombsAround
+            newArr[xOffset][yOffset].bombsAround != 9 && (newArr[xOffset][yOffset].clicked = true)
           }
           else{
-            newArr[xOffset][yOffset].clicked = true
-            newArr[xOffset][yOffset].bombsAround = counter
-            countBombsAround(xOffset, yOffset, newArr, true)
+            if(!newArr[xOffset][yOffset].clicked){
+              newArr[xOffset][yOffset].clicked = true
+              await recursion(xOffset, yOffset, newArr)
+            }
           }
         }
         yOffset+=1
       }
-    
       yOffset=y-1
       xOffset+=1
     }
-
-
-    console.log("Executing")
-    return counter
   }
 
   const randomizer = () => ({x: Math.floor(Math.random() * gameSettings.x), y: Math.floor(Math.random() * gameSettings.y)})
 
   return {create, field, set, gameSettings, click}
 }
+
+
+
+
+// if(newArr[xOffset]?.[yOffset] && !counter && !newArr[xOffset][yOffset].clicked && withRecursion){
+//   let nextCellBombs = await countBombsAround(xOffset, yOffset, newArr)
+//   if(nextCellBombs || newArr[xOffset][yOffset].isBomb){
+//     if(newArr[xOffset][yOffset].isBomb){break}
+//     newArr[xOffset][yOffset].bombsAround = nextCellBombs
+//     newArr[xOffset][yOffset].clicked = true
+//     break
+//   }
+//   else{
+//     newArr[xOffset][yOffset].clicked = true
+//     newArr[xOffset][yOffset].bombsAround = counter
+//     await countBombsAround(xOffset, yOffset, newArr, true)
+//   }
+// }

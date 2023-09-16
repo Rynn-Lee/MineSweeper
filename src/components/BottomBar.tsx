@@ -1,6 +1,6 @@
 import styles from '@styles/bottombar.module.sass'
 import Image from 'next/image'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import UserStats from './Bottombar/UserStats'
 
 export default function BottomBarMemo({setters, getters}: any){

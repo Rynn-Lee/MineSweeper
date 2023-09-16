@@ -1,6 +1,6 @@
 import styles from '@styles/bottombar.module.sass'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 export default function AccountSettings({getters, setters}: any){
   const [newUsername, setNewUername]: any = useState()

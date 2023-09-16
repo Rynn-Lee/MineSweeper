@@ -8,7 +8,7 @@ export default function GameLoader({setters, getters}: any){
   useEffect(()=>{
     const expData: any = CountExperience(getters.userData.experience)
     const setts = {
-      particles: services.localstorage.getItem('particles', true),
+      particles: services.localstorage.getItem('particles', false),
       darkTheme: services.localstorage.getItem('darkTheme', true),
       background: services.localstorage.getItem('background', true),
       transparency: services.localstorage.getItem('transparency', true),

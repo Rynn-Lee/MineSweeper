@@ -15,7 +15,7 @@ export const useGame = (fn: any) => {
   })
   const player = useRef({
     exp: 0,
-    clicked: 1
+    clicked: 0
   })
 
   const create = () =>{
@@ -72,30 +72,29 @@ export const useGame = (fn: any) => {
         ? await ifContinue()
         : await countBombsAround(x, y, newArr)
 
-    console.log(memorySizeOf(newArr))
     setField(newArr)
   }
 
   const bombed = (newArr: any, x: number, y: number) => {
     newArr[x][y].bombsAround = 9
-    player.current = {exp: 0, clicked: 1}
+    player.current = {exp: 0, clicked: 0}
   }
 
-  const addExp = async (newArr: any, x: number, y: number) => {
-    newArr[x][y].bombsAround = await countBombsAround(x, y)
-    player.current.clicked == gameSettings.cells && playerWin()
-    return {
-      exp: player.current.exp + gameSettings.xpPerCell,
-      clicked: player.current.clicked + 1
+  const addExp = async () => {
+    player.current = {
+      clicked: player.current.clicked += 1,
+      exp: player.current.exp + gameSettings.xpPerCell
     }
+    player.current.clicked == gameSettings.cells && playerWin()
   }
   
   const playerWin = () => {
     fn(player.current.exp)
-    player.current = {exp: 0, clicked: 1}
+    player.current = {exp: 0, clicked: 0}
   }
 
   const countBombsAround = async(x: number, y: number, newArr?: any) => {
+    addExp()
     let xOffset = x-1, yOffset = y-1
     let counter = 0
     while(xOffset <= x+1){
@@ -146,50 +145,13 @@ export const useGame = (fn: any) => {
 
   const clear = () => {
     setField([[]])
+    player.current = {
+      exp: 0,
+      clicked: 0
+    }
   }
 
   const randomizer = () => ({x: Math.floor(Math.random() * gameSettings.x), y: Math.floor(Math.random() * gameSettings.y)})
-
-
-
-  function memorySizeOf(obj: any) {
-    var bytes = 0;
-  
-    function sizeOf(obj:any) {
-      if (obj !== null && obj !== undefined) {
-        switch (typeof obj) {
-          case "number":
-            bytes += 8;
-            break;
-          case "string":
-            bytes += obj.length * 2;
-            break;
-          case "boolean":
-            bytes += 4;
-            break;
-          case "object":
-            var objClass = Object.prototype.toString.call(obj).slice(8, -1);
-            if (objClass === "Object" || objClass === "Array") {
-              for (var key in obj) {
-                if (!obj.hasOwnProperty(key)) continue;
-                sizeOf(obj[key]);
-              }
-            } else bytes += obj.toString().length * 2;
-            break;
-        }
-      }
-      return bytes;
-    }
-  
-    function formatByteSize(bytes: any) {
-      if (bytes < 1024) return bytes + " bytes";
-      else if (bytes < 1048576) return (bytes / 1024).toFixed(3) + " KiB";
-      else if (bytes < 1073741824) return (bytes / 1048576).toFixed(3) + " MiB";
-      else return (bytes / 1073741824).toFixed(3) + " GiB";
-    }
-  
-    return formatByteSize(sizeOf(obj));
-  }
 
   return {create, field, set, gameSettings, click, clear}
 }

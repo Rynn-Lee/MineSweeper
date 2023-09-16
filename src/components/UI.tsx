@@ -28,10 +28,6 @@ export function StepToggle({initial, from, to, by, fn, substract}: any){
     fn(Number(step.current))
   }
 
-  // useEffect(()=>{
-  //   !step.current && (step.current = initial)
-  // }, [initial])
-
   return(
     <button className={styles.toggle} onClick={stepUp} onContextMenuCapture={(e)=>{e.preventDefault(); stepDown}}>{substract ? to - step.current : step.current}</button>
   )
@@ -42,6 +38,7 @@ export function ChooseField({initial, variants, fn, mode}: any){
   useEffect(()=>{
     const split = chooseVariant.text.toString().split('x')
     mode == "field" ? fn(split[0], split[1]) : fn(split[1])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chooseVariant])
   
   return(

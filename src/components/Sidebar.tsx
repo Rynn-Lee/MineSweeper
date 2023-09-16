@@ -1,5 +1,4 @@
 import styles from '@styles/sidebar.module.sass'
-import { Toggle } from './UI'
 import React from 'react'
 import Visuals from './Sidebar/Visuals'
 import Game from './Sidebar/Game'

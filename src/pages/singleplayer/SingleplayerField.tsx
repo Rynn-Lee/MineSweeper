@@ -3,12 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useRef, useEffect } from 'react'
-import { Field } from './Field'
+import Field from './Field'
 
 export default function SingleplayerField({setters, getters}: any){
   const isDragging = useRef<any>(false)
   useEffect(()=>{
     !setters.game.field && setters.game.create()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const dragControl = (event: any, info: any) => {

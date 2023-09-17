@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-function MemoField({getters, setters, styles, isDragging}: any){
+export default function Field({getters, setters, styles, isDragging}: any){
   return(
     getters?.game?.field?.map((row: any, indexRow: number)=>(
       <div key={indexRow}>
@@ -25,4 +25,4 @@ function MemoField({getters, setters, styles, isDragging}: any){
   )
 }
 
-export const Field = React.memo(MemoField)
+// export const Field = React.memo(MemoField)

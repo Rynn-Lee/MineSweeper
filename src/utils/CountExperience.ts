@@ -8,7 +8,7 @@ export const CountExperience = (data: any) => {
 
   while(Math.floor(lvl.xpLeft) >= Math.floor(lvl.xpNeeded)){
     lvl.xpLeft = Math.floor(lvl.xpLeft) - Math.floor(lvl.xpNeeded)
-    lvl.xpNeeded += 150*((lvl.lvl/10)+1)
+    lvl.xpNeeded += 150*((lvl.lvl/2)+1)
     lvl.lvl += 1
   }
   lvl.wide = (lvl.xpLeft/lvl.xpNeeded)*100

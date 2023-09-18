@@ -68,3 +68,31 @@ export function LevelProgress({data}: any){
     </div>
   )
 }
+
+export function Select({text, initial, variants, values, fn}: any){
+  const [toggle, setToggle] = useState(false)
+  const [chosenValue, setChosenValue] = useState({id: initial, value: values[initial], text: variants[initial]})
+
+  const choose = (index: any, item: any) => {
+    setChosenValue({id: index, value: values[index], text: item})
+    fn(values[index])
+  }
+
+  useEffect(()=>{
+    values.find((value: any, index: any) => initial == value && setChosenValue({id: index, value: values[index], text: variants[index]}))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return(
+    <div className={styles.select} onClick={()=>setToggle(!toggle)}>
+      <span>{text}: {chosenValue.text}</span>
+      {toggle && 
+        <div>
+          {variants.map((item: any, index: number) => (
+            <span key={index} onClick={()=>choose(index, item)}>{item}</span>
+          ))}
+        </div> 
+      }
+    </div>
+  )
+}

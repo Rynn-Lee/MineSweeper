@@ -28,3 +28,39 @@
     height: 2px
     &:last-child
       background: #3d3d3d
+
+.select
+  flex-direction: column
+  width: 500px !important
+  display: flex
+  transition: var(--var-transition)
+  background: var(--var-buttons-bg)
+  text-align: center
+  justify-content: center
+  // align-items: center
+  span
+    flex: 1
+    transition: var(--var-transition)
+    padding: 10px 10px
+    min-width: max-content
+    display: flex
+    justify-content: flex-start
+    &:hover
+      background: var(--var-buttons-bg-hover)
+  div
+    height: 400px
+    width: inherit
+    backdrop-filter: var(--var-backdrop-blur)
+    background: var(--var-interface-background)
+    overflow-x: auto
+    position: absolute
+    top: 0px
+    left: 0px
+    display: flex
+    flex-direction: column
+    span
+      display: flex
+      background: var(--var-buttons-bg)
+      text-align: center
+      justify-content: center
+      align-items: center

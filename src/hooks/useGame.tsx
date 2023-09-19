@@ -1,3 +1,4 @@
+import { invoke } from '@tauri-apps/api/tauri'
 import { useEffect, useState, useRef } from 'react'
 
 export const useGame = (fn: any) => {
@@ -20,16 +21,26 @@ export const useGame = (fn: any) => {
 
   const create = () =>{
     const bombsAmount = Math.round((gameSettings.multiplier / 20) * ((gameSettings.x-0.5) * (gameSettings.y-0.5)))
-    const field = Array.from(Array(gameSettings.x), () => Array(gameSettings.y).fill({
-      clicked: false,
-      isBomb: false,
-      bombsAround: 0,
-      markedAsBomb: false
-    }))
+    let field: any = [[]]
+    let counter = 0
+
+    for(let i = 0; i < gameSettings.x; i++){
+      for(let j = 0; j < gameSettings.y; j++){
+        field[i].push({
+          id: `${j}.${i}`,
+          clicked: false,
+          isBomb: false,
+          bombsAround: 0,
+          markedAsBomb: false
+        })
+      }
+      field.push([])
+    }
+
     set({
       totalBombs: bombsAmount,
       cells: (gameSettings.x*gameSettings.y)-bombsAmount,
-      xpPerCell: gameSettings.multiplier * (gameSettings.x + gameSettings.y)
+      xpPerCell: gameSettings.multiplier * (gameSettings.x/2 + gameSettings.y/2)
     })
     setField(filler(field, bombsAmount))
   }
@@ -52,8 +63,8 @@ export const useGame = (fn: any) => {
   }
 
   const click = async(x: number, y: number) => {
-    const newArr = JSON.parse(JSON.stringify(field))
-    
+    // const newArr = JSON.parse(JSON.stringify(field))
+    const newArr = [...field]
     const ifContinue = async() => {
       const bombsAround = await countBombsAround(x, y)
       if(!bombsAround){
@@ -110,7 +121,7 @@ export const useGame = (fn: any) => {
         newArr[x][y].bombsAround = counter
       }
       else{
-        newArr[x][y] = {clicked: true}
+        newArr[x][y] = {id: newArr[x][y].id, clicked: true}
       }
     }
     return counter

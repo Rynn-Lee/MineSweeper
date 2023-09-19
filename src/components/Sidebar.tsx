@@ -4,7 +4,7 @@ import Visuals from './Sidebar/Visuals'
 import Game from './Sidebar/Game'
 import Interface from './Sidebar/Interface'
 
-export default function SidebarMemo({setters, getters}: any){
+export default function Sidebar({setters, getters}: any){
   return(
     <div className={`${styles.sidebarWrapper}`} style={getters.windows.settings ? {width: '100vw'} : {width: 'max-content'}}>
       <div className={styles.closingArea} style={getters.windows.settings ? {display: 'block'} : {display: 'none'}} onClick={()=>setters.setWindows({...getters.windows, settings: false})}/>
@@ -27,4 +27,4 @@ export default function SidebarMemo({setters, getters}: any){
 }
 
 
-export const Sidebar = React.memo(SidebarMemo)
+// export const Sidebar = React.memo(SidebarMemo)

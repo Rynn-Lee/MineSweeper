@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from '@styles/applayout.module.sass'
 import { BottomBar } from "@/components/BottomBar";
-import { Sidebar } from "@/components/Sidebar";
+import Sidebar from "@/components/Sidebar";
 import GameLoader from "@/components/GameLoader";
 import AccountSettings from "@/components/Bottombar/AccountSettings";
 

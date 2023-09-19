@@ -36,15 +36,10 @@ export default function Gamesetup({setters, getters}: any){
                       values={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
                       fn={setMultiplier}/>
             </span>
+            <hr />
             <span>Reveal Empty Cells: <Toggle state={getters.game.gameSettings.revealEmpty} fn={()=>setters.game.set({revealEmpty: !getters.game.gameSettings.revealEmpty})}/></span>
             <span><button className={styles.startGame} onClick={setGame}>Start Game</button></span>
           </fieldset>
-          {/* <fieldset className={styles.settings}>
-            <legend>Game</legend>
-            <span>Field: {getters.game.gameSettings.x}x{getters.game.gameSettings.y} ({getters.game.gameSettings.x * getters.game.gameSettings.y} cells)</span>
-            <span>Bomb multiplier: x{getters.game.gameSettings.multiplier}</span>
-            <span>XP per cell: {getters.game.gameSettings.multiplier * (getters.game.gameSettings.x + getters.game.gameSettings.y)}xp</span>
-          </fieldset> */}
           <fieldset className={styles.description}>
             <legend>Tips</legend>
             *Bomb multiplier = XP multiplier<hr/>

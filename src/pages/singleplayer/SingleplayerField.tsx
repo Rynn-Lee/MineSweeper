@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useRef, useEffect } from 'react'
-import Field from './Field'
+import { Field } from './Field'
 
 export default function SingleplayerField({setters, getters}: any){
   const isDragging = useRef<any>(false)
@@ -40,6 +40,9 @@ export default function SingleplayerField({setters, getters}: any){
             styles={styles}
             isDragging={isDragging}/>
         </motion.div>
+        <div className={styles.sidebar}>
+          YASS
+        </div>
       </div>
     </div>
   )

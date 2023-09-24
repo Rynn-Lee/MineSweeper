@@ -1,5 +1,4 @@
-import { invoke } from '@tauri-apps/api/tauri'
-import { useEffect, useState, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export const useGame = (fn: any) => {
   const [field, setField] = useState<any>()
@@ -22,7 +21,6 @@ export const useGame = (fn: any) => {
   const create = () =>{
     const bombsAmount = Math.round((gameSettings.multiplier / 20) * ((gameSettings.x-0.5) * (gameSettings.y-0.5)))
     let field: any = [[]]
-    let counter = 0
 
     for(let i = 0; i < gameSettings.x; i++){
       for(let j = 0; j < gameSettings.y; j++){
@@ -42,6 +40,7 @@ export const useGame = (fn: any) => {
       cells: (gameSettings.x*gameSettings.y)-bombsAmount,
       xpPerCell: gameSettings.multiplier * (gameSettings.x/2 + gameSettings.y/2)
     })
+
     setField(filler(field, bombsAmount))
   }
 
@@ -63,8 +62,8 @@ export const useGame = (fn: any) => {
   }
 
   const click = async(x: number, y: number) => {
-    // const newArr = JSON.parse(JSON.stringify(field))
-    const newArr = [...field]
+    const newArr = JSON.parse(JSON.stringify(field))
+    if(newArr[x][y].clicked){return}
     const ifContinue = async() => {
       const bombsAround = await countBombsAround(x, y)
       if(!bombsAround){
@@ -88,6 +87,7 @@ export const useGame = (fn: any) => {
 
   const bombed = (newArr: any, x: number, y: number) => {
     newArr[x][y].bombsAround = 9
+    create()
     player.current = {exp: 0, clicked: 0}
   }
 
@@ -164,5 +164,5 @@ export const useGame = (fn: any) => {
 
   const randomizer = () => ({x: Math.floor(Math.random() * gameSettings.x), y: Math.floor(Math.random() * gameSettings.y)})
 
-  return {create, field, set, gameSettings, click, clear}
+  return {create, field, set, gameSettings, click, clear, player: player.current}
 }

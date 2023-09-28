@@ -55,6 +55,8 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return(
+    <div
+    onContextMenu={(e: any)=>e.preventDefault()}>
       <AppLayout
         toggles={toggles}
         setters={setters}
@@ -72,5 +74,6 @@ export default function App({ Component, pageProps }: AppProps) {
             </motion.div>
         </AnimatePresence>
       </AppLayout>
+    </div>
   )
 }

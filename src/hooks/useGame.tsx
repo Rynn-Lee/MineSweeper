@@ -25,7 +25,6 @@ export const useGame = (fn: any) => {
     for(let i = 0; i < gameSettings.x; i++){
       for(let j = 0; j < gameSettings.y; j++){
         field[i].push({
-          id: `${j}.${i}`,
           clicked: false,
           isBomb: false,
           bombsAround: 0,
@@ -121,7 +120,7 @@ export const useGame = (fn: any) => {
         newArr[x][y].bombsAround = counter
       }
       else{
-        newArr[x][y] = {id: newArr[x][y].id, clicked: true}
+        newArr[x][y] = {clicked: true}
       }
     }
     return counter

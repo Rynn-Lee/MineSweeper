@@ -7,6 +7,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+      <script src="/static/movingBackground.js" async></script>
       </body>
     </Html>
   )

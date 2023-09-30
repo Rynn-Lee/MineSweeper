@@ -4,8 +4,21 @@ import { BottomBar } from "@/components/BottomBar";
 import Sidebar from "@/components/Sidebar";
 import GameLoader from "@/components/GameLoader";
 import AccountSettings from "@/components/Bottombar/AccountSettings";
+import { motion } from 'framer-motion'
+import { useAnimation } from "framer-motion";
 
 export default function AppLayout({children, toggles, setters, getters}: any){
+  const imgAnimation = useAnimation()
+  const handleMouseMove = (e: any) => {
+    const {clientX, clientY} = e
+    const moveX = clientX - window.innerWidth / 2
+    const moveY = clientY - window.innerHeight / 2
+    const offsetFactor = 12
+    imgAnimation.start({
+      x: moveX / offsetFactor,
+      y: moveY / offsetFactor
+    })
+  }
 
   return(
     <>
@@ -15,12 +28,20 @@ export default function AppLayout({children, toggles, setters, getters}: any){
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       {getters.isSetup ? <GameLoader setters={setters} getters={getters}/> : <></>}
-      {getters.settings.background ? <div className={styles.background}/> : <></>}
+      {getters.settings.background 
+      ? 
+        <motion.div
+          className={styles.background}
+          animate={imgAnimation}
+          onMouseMove={e => handleMouseMove(e)}/> 
+      : <></>}
       <div className={styles.content}>
         <Sidebar
           setters={setters}
           getters={getters}/>
-        {children}
+        <motion.div onMouseMove={e => handleMouseMove(e)}> 
+          {children}
+        </motion.div>
         <AccountSettings
           getters={getters} 
           setters={setters}/>

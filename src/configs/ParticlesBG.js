@@ -1,6 +1,8 @@
 import Particles from "react-tsparticles"
 import { loadFull } from "tsparticles"
 import ParticlesConfigLight from '@configs/particlesjs-config-light'
+import ParticlesConfigStarsLight from '@configs/particlesjs-config-stars-light'
+import ParticlesConfigStarsDark from '@configs/particlesjs-config-stars-dark'
 import ParticlesConfigDark from '@configs/particlesjs-config-dark'
 import React from "react"
 
@@ -12,7 +14,7 @@ function Particlesbg({darkTheme}){
       <Particles 
       id="tsparticles"
       init={loadParticles}
-      options={darkTheme ? ParticlesConfigLight : ParticlesConfigDark}/>
+      options={darkTheme ? ParticlesConfigStarsLight : ParticlesConfigStarsDark}/>
     </div>
   )
 }

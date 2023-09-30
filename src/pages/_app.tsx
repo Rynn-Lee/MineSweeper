@@ -38,10 +38,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const recorder = useRecorder(userData, "userData", true)
   const observer = useObserver(settings.darkTheme, ()=>setSettings((prevSettings) => ({...prevSettings, assets: settings.darkTheme ? lightAssets : darkAssets})))
 
-  useEffect(()=>{
-    console.log(userData)
-  }, [userData])
-
   const variants = {
     initial: {
       opacity: 0,

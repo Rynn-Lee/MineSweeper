@@ -14,6 +14,7 @@ export default function GameLoader({setters, getters}: any){
       transparency: services.localstorage.getItem('transparency', true),
       animations: services.localstorage.getItem('animations', true),
       slidingField: services.localstorage.getItem('slidingField', true),
+      movingBackground: services.localstorage.getItem('movingBackground', true),
       fieldBouncing: services.localstorage.getItem('fieldBouncing', 650),
       userData: services.enc.decodeObject(services.localstorage.getItem('userData'))
     }
@@ -26,6 +27,7 @@ export default function GameLoader({setters, getters}: any){
         transparency: setts.transparency,
         animations: setts.animations,
         slidingField: setts.slidingField,
+        movingBackground: setts.movingBackground,
         fieldBouncing: setts.fieldBouncing,
         assets: setts.darkTheme ? lightAssets : darkAssets
       })

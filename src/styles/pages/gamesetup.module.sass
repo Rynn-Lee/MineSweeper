@@ -1,3 +1,5 @@
+@import "../imports/pixelated-corners"
+
 .gamesetup
   height: 100vh
   width: 100vw
@@ -6,6 +8,7 @@
   justify-content: center
 
 .window
+  @extend .corner
   position: relative
   backdrop-filter: var(--var-backdrop-blur)
   display: flex
@@ -25,6 +28,7 @@
   flex-direction: row
 
 .top
+  @extend .corner
   backdrop-filter: var(--var-backdrop-blur)
   z-index: 4
   display: flex
@@ -34,6 +38,7 @@
   transition: var(--var-transition)
   justify-content: center
   a
+    @extend .corner
     display: flex
     align-items: center
     justify-content: center
@@ -41,7 +46,6 @@
     top: 0px
     left: 0px
     padding: 10px 20px
-    border-radius: 0px 10px 10px 0px
     transition: var(--var-transition)
     background: var(--var-buttons-bg)
     &:hover
@@ -76,16 +80,15 @@
   color: var(--var-font-color)
   padding: 5px 10px
   border: none
-  border-radius: 10px
   outline: none
 
 .startGame
+  @extend .corner
   cursor: pointer
   background: var(--var-buttons-bg)
   color: var(--var-font-color)
   padding: 15px 20px
   border: none
-  border-radius: 10px
   width: 200px
   transition: var(--var-transition)
   &:hover

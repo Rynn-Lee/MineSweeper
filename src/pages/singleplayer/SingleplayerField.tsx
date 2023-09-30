@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useRef, useEffect } from 'react'
-import { Field } from './Field'
+import Field from './Field'
 import GameSidebar from '@/components/Game/GameSidebar'
 
 export default function SingleplayerField({setters, getters}: any){

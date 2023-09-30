@@ -1,4 +1,6 @@
+@import "./imports/pixelated-corners"
 .bottombar
+  @extend .corner
   position: fixed
   bottom: 0px
   padding: 0px 20px 0px 8px
@@ -10,7 +12,6 @@
   align-items: center
   justify-content: space-between
   background: var(--var-buttons-bg)
-  // background: var(--var-interface-background)
   z-index: 100
   backdrop-filter: var(--var-backdrop-blur)
 
@@ -19,15 +20,15 @@
   display: flex
   transition: var(--var-transition)
   justify-content: center
+  @extend .corner
   align-items: center
   &:hover
     background: #ffffff20
-    border-radius: 50px
     cursor: pointer
 
 .userStats
-  padding: 0px 0px 0px 20px
-  border-radius: 20px
+  padding: 0px 20px 0px 20px
+  @extend .corner
   display: flex
   flex-direction: row
   align-items: center
@@ -78,6 +79,7 @@
   top: 0px
   left: 0px
 .accountSettings
+  @extend .corner
   backdrop-filter: var(--var-backdrop-blur)
   transition: var(--var-transition)
   position: fixed

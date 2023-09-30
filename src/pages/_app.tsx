@@ -1,11 +1,12 @@
 import AppLayout from '@/layouts/AppLayout'
 import { lightAssets, darkAssets } from '@/assets/assets'
 import type { AppProps } from 'next/app'
+import styles from '@styles/applayout.module.sass'
 import { MemoizedParticles } from '@/configs/ParticlesBG'
 import { useRecorder } from '@/hooks/useRecorder'
 import { useToggles } from '@/hooks/useToggles'
-import React, { useState, useEffect } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import React, { useState } from 'react'
+import { AnimatePresence, motion, useAnimation } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { interfaces, dummyData } from '@interfaces/interfaces'
 import '@/styles/index.sass'
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [settings, setSettings] = useState<interfaces.settings>({})
   const [windows, setWindows] = useState<interfaces.windows>({})
   const [userData, setUserData] = useState<interfaces.userData>(dummyData.userData)
+  const imgAnimation = useAnimation()
   const router = useRouter()
   const toggle: any = useToggles()
 
@@ -28,12 +30,24 @@ export default function App({ Component, pageProps }: AppProps) {
     toggleTransparency: ()=>setSettings((prevSettings) => ({...prevSettings, transparency: toggle.toggle(prevSettings.transparency, 'transparency', 'transparency')})),
     toggleAnimations: ()=>setSettings((prevSettings) => ({...prevSettings, animations: toggle.toggle(prevSettings.animations, 'animations', 'animations')})),
     toggleSlidingField: ()=>setSettings((prevSettings) => ({...prevSettings, slidingField: toggle.toggle(prevSettings.slidingField, 'slidingField', 'slidingField')})),
+    toggleMovingBackground: ()=>setSettings((prevSettings) => ({...prevSettings, movingBackground: toggle.toggle(prevSettings.movingBackground, 'movingBackground')})),
     toggleFieldBouncing: (newValue: number)=>setSettings((prevSettings) => ({...prevSettings, fieldBouncing: toggle.update('fieldBouncing', newValue)})),
     addExperience: (value: number)=>setUserData((prevSettings: any) => ({...prevSettings, experience: prevSettings.experience + value, ...CountExperience(prevSettings.experience + value)}))
   })
 
+  const handleMouseMove = (e: any) => {
+    const {clientX, clientY} = e
+    const moveX = clientX - window.innerWidth / 2
+    const moveY = clientY - window.innerHeight / 2
+    const offsetFactor = 12
+    imgAnimation.start({
+      x: moveX / offsetFactor,
+      y: moveY / offsetFactor
+    })
+  }
+
   const game = useGame(toggles.addExperience)
-  const getters = {windows, settings, userData, isSetup, game}
+  const getters = {windows, settings, userData, isSetup, game, handleMouseMove}
   const setters = {setWindows, toggles, setSettings, setIsSetup: ()=>setIsSetup(false), setUserData, game}
   const recorder = useRecorder(userData, "userData", true)
   const observer = useObserver(settings.darkTheme, ()=>setSettings((prevSettings) => ({...prevSettings, assets: settings.darkTheme ? lightAssets : darkAssets})))
@@ -54,21 +68,25 @@ export default function App({ Component, pageProps }: AppProps) {
     <div
     onContextMenu={(e: any)=>e.preventDefault()}>
       <AppLayout
-        toggles={toggles}
         setters={setters}
         getters={getters}>
-        {settings.particles ? <MemoizedParticles darkTheme={settings.darkTheme}/> : <></>}
+        <motion.div
+            className={styles?.background}
+            animate={getters.settings.movingBackground ? imgAnimation : false}
+            onMouseMove={e => handleMouseMove(e)}>
+            {settings.particles ? <MemoizedParticles darkTheme={settings.darkTheme}/> : <></>}
+        </motion.div> 
         <AnimatePresence mode='wait' initial={false}>
-            <motion.div
-              transition={{duration: getters.settings.animations ? 0.1 : 0}}
-              key={router.route}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={variants}>
-              <Component {...pageProps} getters={getters} setters={setters}/>
-            </motion.div>
-        </AnimatePresence>
+          <motion.div
+            transition={{duration: getters.settings.animations ? 0.1 : 0}}
+            key={router.route}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={variants}>
+            <Component {...pageProps} getters={getters} setters={setters}/>
+          </motion.div>
+      </AnimatePresence>
       </AppLayout>
     </div>
   )

@@ -7,18 +7,7 @@ import AccountSettings from "@/components/Bottombar/AccountSettings";
 import { motion } from 'framer-motion'
 import { useAnimation } from "framer-motion";
 
-export default function AppLayout({children, toggles, setters, getters}: any){
-  const imgAnimation = useAnimation()
-  const handleMouseMove = (e: any) => {
-    const {clientX, clientY} = e
-    const moveX = clientX - window.innerWidth / 2
-    const moveY = clientY - window.innerHeight / 2
-    const offsetFactor = 12
-    imgAnimation.start({
-      x: moveX / offsetFactor,
-      y: moveY / offsetFactor
-    })
-  }
+export default function AppLayout({children, setters, getters}: any){
 
   return(
     <>
@@ -28,18 +17,11 @@ export default function AppLayout({children, toggles, setters, getters}: any){
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       {getters.isSetup ? <GameLoader setters={setters} getters={getters}/> : <></>}
-      {getters.settings.background 
-      ? 
-        <motion.div
-          className={styles.background}
-          animate={imgAnimation}
-          onMouseMove={e => handleMouseMove(e)}/> 
-      : <></>}
       <div className={styles.content}>
         <Sidebar
           setters={setters}
           getters={getters}/>
-        <motion.div onMouseMove={e => handleMouseMove(e)}> 
+        <motion.div onMouseMove={e => getters.handleMouseMove(e)}> 
           {children}
         </motion.div>
         <AccountSettings

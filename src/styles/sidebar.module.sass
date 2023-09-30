@@ -1,3 +1,4 @@
+@import "./imports/pixelated-corners"
 .sidebarWrapper
   z-index: 100
   position: fixed
@@ -7,6 +8,7 @@
   bottom: 44px
 
 .sidebar
+  @extend .corner
   overflow-x: hidden
   overflow-y: auto
   z-index: 101
@@ -30,6 +32,7 @@
     padding: 10px
   .option
     padding: 5px 10px
+    @extend .toggleCorner
     background: var(--var-buttons-bg)
     display: flex
     flex-direction: row

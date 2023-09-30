@@ -7,6 +7,7 @@ export namespace interfaces {
     animations?: boolean | null
     assets?: any
     slidingField?: boolean | null
+    movingBackground?: boolean | null
     fieldBouncing?: number | null
   }
   export interface userData {

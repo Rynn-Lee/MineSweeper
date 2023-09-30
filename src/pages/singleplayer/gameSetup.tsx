@@ -33,9 +33,8 @@ export default function Gamesetup({setters, getters}: any){
                       variants={['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9', 'x10', 'x11', 'x12', 'x13', 'x14', 'x15']}
                       values={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
                       fn={setMultiplier}/>
-            </span>
-            <hr />
-            <span>Reveal Empty Cells: <Toggle state={getters.game.gameSettings.revealEmpty} fn={()=>setters.game.set({revealEmpty: !getters.game.gameSettings.revealEmpty})}/></span>
+            </span><br/>
+            <span>Reveal Empty Cells: <Toggle state={getters.game.gameSettings.revealEmpty} fn={()=>setters.game.set({revealEmpty: !getters.game.gameSettings.revealEmpty})}/></span><br/>
             <span><button className={styles.startGame} onClick={setGame}>Start Game</button></span>
           </fieldset>
           <fieldset className={styles.description}>

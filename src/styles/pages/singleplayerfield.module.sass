@@ -1,3 +1,4 @@
+@import "../imports/pixelated-corners"
 .singleplayer
   position: fixed
   width: 100vw
@@ -25,6 +26,7 @@
   background: var(--var-gamepage-bg)
 
 .top
+  @extend .toggleCorner
   backdrop-filter: var(--var-backdrop-blur)
   top: 0px
   display: flex
@@ -49,6 +51,7 @@
       background: var(--var-buttons-bg-hover)
 
 .cell
+  @extend .toggleCorner
   margin: 1px
   width: 40px
   height: 40px
@@ -62,6 +65,7 @@
     background: var(--var-field-cells-hover)
 
 .field
+  @extend .corner
   display: flex
   padding: 20px
   background: var(--var-field-bg)
@@ -70,9 +74,11 @@
   background: var(--var-bombs-color) !important
 
 .sidebar
+  @extend .corner
+  padding: 10px
   position: fixed
   display: flex
-  top: 32px
+  top: 34px
   right: 0px
   bottom: 44px
   color: var(--var-font-color)

@@ -10,6 +10,10 @@ export default function Visuals({styles, getters, setters}: any){
       <span className={styles.impact}><span data-impact="high">•••</span><Toggle state={getters.settings.particles} fn={setters.toggles.toggleParticles}/></span>
     </div>
     <div className={styles.option}>
+      <span>Moving Background</span>
+      <span className={styles.impact}><span data-impact="medium">••</span><Toggle state={getters.settings.movingBackground} fn={setters.toggles.toggleMovingBackground}/></span>
+    </div>
+    <div className={styles.option}>
       <span>Transparency</span>
       <span className={styles.impact}><span data-impact="low">•</span><Toggle state={getters.settings.transparency} fn={setters.toggles.toggleTransparency}/></span>
     </div>

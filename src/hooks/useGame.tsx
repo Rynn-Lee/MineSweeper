@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 
 export const useGame = (fn: any) => {
-  const [field, setField] = useState<any>()
+  // const [field, setField] = useState<any>()
+  const gamefield = useRef<any>()
   const [gameSettings, setGameSettings] = useState({
     x: 10,
     y: 10,
@@ -40,7 +41,7 @@ export const useGame = (fn: any) => {
       xpPerCell: gameSettings.multiplier * (gameSettings.x/2 + gameSettings.y/2)
     })
 
-    setField(filler(field, bombsAmount))
+    gamefield.current = filler(field, bombsAmount)
   }
 
   const filler = (field: any, bombsAmount: number) => {
@@ -61,7 +62,7 @@ export const useGame = (fn: any) => {
   }
 
   const click = async(x: number, y: number) => {
-    const newArr = JSON.parse(JSON.stringify(field))
+    const newArr = JSON.parse(JSON.stringify(gamefield.current))
     if(newArr[x][y].clicked){return}
     const ifContinue = async() => {
       const bombsAround = await countBombsAround(x, y)
@@ -81,7 +82,7 @@ export const useGame = (fn: any) => {
         ? await ifContinue()
         : await countBombsAround(x, y, newArr)
 
-    setField(newArr)
+    gamefield.current = newArr
   }
 
   const bombed = (newArr: any, x: number, y: number) => {
@@ -109,7 +110,7 @@ export const useGame = (fn: any) => {
     let counter = 0
     while(xOffset <= x+1){
       while(yOffset <= y+1){
-        if(field[xOffset]?.[yOffset]?.isBomb){counter += 1}
+        if(gamefield.current[xOffset]?.[yOffset]?.isBomb){counter += 1}
         yOffset+=1
       }
       yOffset=y-1
@@ -154,7 +155,7 @@ export const useGame = (fn: any) => {
   }
 
   const clear = () => {
-    setField([[]])
+    gamefield.current = [[]]
     player.current = {
       exp: 0,
       clicked: 0
@@ -163,5 +164,5 @@ export const useGame = (fn: any) => {
 
   const randomizer = () => ({x: Math.floor(Math.random() * gameSettings.x), y: Math.floor(Math.random() * gameSettings.y)})
 
-  return {create, field, set, gameSettings, click, clear, player: player.current}
+  return {create, field: gamefield.current, set, gameSettings, click, clear, player: player.current}
 }

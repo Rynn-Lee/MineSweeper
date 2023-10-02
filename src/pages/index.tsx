@@ -7,9 +7,10 @@ export default function Home({getters, setters}: any) {
       <div className={styles.line}>
         <div className={styles.logo}>MineSweeper Online <span className={styles.version}>v0.0.1</span></div>
         <div className={styles.buttons}>
-          <Link href="/singleplayer/Gamesetup"><button>Singleplayer</button></Link>
+          <Link href="/singleplayer/gameSetup"><button>Singleplayer</button></Link>
           <button disabled>LAN</button>
           <button disabled>Multiplayer</button>
+          <button onClick={()=>setters.showWarning("warning", "Test Warning Yee")}>Show Warning</button>
         </div>
       </div>
     </div>

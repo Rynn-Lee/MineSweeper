@@ -13,12 +13,14 @@ import '@/styles/index.sass'
 import { useObserver } from '@/hooks/useObserver'
 import { useGame } from '@/hooks/useGame'
 import { CountExperience } from '@/utils/CountExperience'
+import useWarning from '@/hooks/useWarning'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isSetup, setIsSetup] = useState(true)
   const [settings, setSettings] = useState<interfaces.settings>({})
   const [windows, setWindows] = useState<interfaces.windows>({})
   const [userData, setUserData] = useState<interfaces.userData>(dummyData.userData)
+  const {WarningWrapper, show} = useWarning({settings, setSettings})
   const imgAnimation = useAnimation()
   const router = useRouter()
   const toggle: any = useToggles()
@@ -46,11 +48,13 @@ export default function App({ Component, pageProps }: AppProps) {
     })
   }
 
+  useObserver(settings.darkTheme, ()=>setSettings((prevSettings) => ({...prevSettings, assets: settings.darkTheme ? lightAssets : darkAssets})))
+  useRecorder(userData, "userData", true)
+  useRecorder(settings.warningsIgnoreList, "warningsIgnoreList", true)
+
   const game = useGame(toggles.addExperience)
   const getters = {windows, settings, userData, isSetup, game, handleMouseMove}
-  const setters = {setWindows, toggles, setSettings, setIsSetup: ()=>setIsSetup(false), setUserData, game}
-  const recorder = useRecorder(userData, "userData", true)
-  const observer = useObserver(settings.darkTheme, ()=>setSettings((prevSettings) => ({...prevSettings, assets: settings.darkTheme ? lightAssets : darkAssets})))
+  const setters = {setWindows, toggles, setSettings, setIsSetup: ()=>setIsSetup(false), setUserData, game, showWarning: show}
 
   const variants = {
     initial: {
@@ -67,6 +71,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return(
     <div
     onContextMenu={(e: any)=>e.preventDefault()}>
+      <WarningWrapper/>
       <AppLayout
         setters={setters}
         getters={getters}>

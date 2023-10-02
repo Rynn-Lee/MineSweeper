@@ -9,6 +9,7 @@ export namespace interfaces {
     slidingField?: boolean | null
     movingBackground?: boolean | null
     fieldBouncing?: number | null
+    warningsIgnoreList?: []
   }
   export interface userData {
     accountName?: string,

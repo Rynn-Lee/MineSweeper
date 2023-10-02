@@ -18,7 +18,7 @@ export default function AccountSettings({getters, setters}: any){
           <span className={styles.title}>Change Nickname</span>
           <div>
             <input type="text" className={styles.input} value={newUsername} onChange={(e)=>setNewUername(e.target.value.replace(/[^A-Za-z0-9]/,''))} maxLength={21}/>
-            <button onClick={setAccountName}><Image src={getters?.settings?.assets?.check} alt="check" width={20} height={20}/></button>
+            {getters?.settings?.assets?.check ? <button onClick={setAccountName}><Image src={getters?.settings?.assets?.check} alt="check" width={20} height={20}/></button> : <></>}
           </div>
         </div>
       </div>

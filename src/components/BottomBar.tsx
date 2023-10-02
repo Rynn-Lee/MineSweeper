@@ -9,7 +9,7 @@ export default function BottomBarMemo({setters, getters}: any){
       <div className={styles.bottombar}>
         <div>
           <span className={styles.icons} onClick={()=>setters.setWindows({...getters.windows, settings: !getters.windows.settings})}>
-            <Image src={getters?.settings?.assets?.settings} alt="settings" width={20} height={20}/>
+            {getters?.settings?.assets?.settings ? <Image src={getters?.settings?.assets?.settings} alt="settings" width={20} height={20}/> : <></>}
           </span>
         </div>
         <UserStats getters={getters} setters={setters}/>

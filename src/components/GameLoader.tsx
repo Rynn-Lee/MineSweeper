@@ -16,7 +16,8 @@ export default function GameLoader({setters, getters}: any){
       slidingField: services.localstorage.getItem('slidingField', true),
       movingBackground: services.localstorage.getItem('movingBackground', true),
       fieldBouncing: services.localstorage.getItem('fieldBouncing', 650),
-      userData: services.enc.decodeObject(services.localstorage.getItem('userData'))
+      userData: services.enc.decodeObject(services.localstorage.getItem('userData')),
+      warningsIgnoreList: services.enc.decodeObject(services.localstorage.getItem('warningsIgnoreList', '[]')),
     }
     if(!getters.settings.darkTheme){
       setters.setSettings({
@@ -29,6 +30,7 @@ export default function GameLoader({setters, getters}: any){
         slidingField: setts.slidingField,
         movingBackground: setts.movingBackground,
         fieldBouncing: setts.fieldBouncing,
+        warningsIgnoreList: setts.warningsIgnoreList,
         assets: setts.darkTheme ? lightAssets : darkAssets
       })
       setters.setUserData({

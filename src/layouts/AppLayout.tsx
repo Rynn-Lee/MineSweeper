@@ -6,9 +6,9 @@ import GameLoader from "@/components/GameLoader";
 import AccountSettings from "@/components/Bottombar/AccountSettings";
 import { motion } from 'framer-motion'
 import { useAnimation } from "framer-motion";
+import useWarning from "@/hooks/useWarning";
 
 export default function AppLayout({children, setters, getters}: any){
-
   return(
     <>
       <Head>

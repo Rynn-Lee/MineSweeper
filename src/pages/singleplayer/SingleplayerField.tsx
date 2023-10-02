@@ -20,7 +20,7 @@ export default function SingleplayerField({setters, getters}: any){
 
   return(
     <div className={styles.singleplayer}>
-      <div className={styles.top}><Link href="/singleplayer/Gamesetup" onClick={setters.game.clear}><Image src={getters?.settings?.assets?.arrowLeft} alt="back" width={30} height={20}/>Back</Link>Game Field</div>
+      <div className={styles.top}><Link href="/singleplayer/gameSetup" onClick={setters.game.clear}><Image src={getters?.settings?.assets?.arrowLeft} alt="back" width={30} height={20}/>Back</Link>Game Field</div>
       <div className={styles.window}>
         <motion.div
           className={styles.field}

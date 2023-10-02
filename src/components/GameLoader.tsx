@@ -17,7 +17,7 @@ export default function GameLoader({setters, getters}: any){
       movingBackground: services.localstorage.getItem('movingBackground', true),
       fieldBouncing: services.localstorage.getItem('fieldBouncing', 650),
       userData: services.enc.decodeObject(services.localstorage.getItem('userData')),
-      warningsIgnoreList: services.enc.decodeObject(services.localstorage.getItem('warningsIgnoreList', '[]')),
+      warningsIgnoreList: services.enc.decodeObject(services.localstorage.getItem('warningsIgnoreList', [])),
     }
     if(!getters.settings.darkTheme){
       setters.setSettings({

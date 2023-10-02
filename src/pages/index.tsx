@@ -10,7 +10,7 @@ export default function Home({getters, setters}: any) {
           <Link href="/singleplayer/gameSetup"><button>Singleplayer</button></Link>
           <button disabled>LAN</button>
           <button disabled>Multiplayer</button>
-          <button onClick={()=>setters.showWarning("warning", "Test Warning Yee")}>Show Warning</button>
+          <button onClick={()=>setters.showWarning("Error", "Another Error")}>Show Warning</button>
         </div>
       </div>
     </div>

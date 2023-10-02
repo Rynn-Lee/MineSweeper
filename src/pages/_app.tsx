@@ -39,9 +39,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const handleMouseMove = (e: any) => {
     const {clientX, clientY} = e
-    const moveX = clientX - window.innerWidth / 2
-    const moveY = clientY - window.innerHeight / 2
-    const offsetFactor = 12
+    const moveX = clientX - window.innerWidth / 3
+    const moveY = clientY - window.innerHeight / 3
+    const offsetFactor = 100
     imgAnimation.start({
       x: moveX / offsetFactor,
       y: moveY / offsetFactor

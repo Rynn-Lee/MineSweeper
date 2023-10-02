@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { increment } from "bb26";
+import { increment as base26 } from "bb26";
 
 const WarnWindow = styled.div`
   position: fixed;
@@ -55,19 +55,22 @@ export default function useWarning(Props: any){
       case "Error": title = "Error"; break;
       case "Notice": title = "Notice"; break;
     }
-    setState({...state, title: title})
+    setState({...state, title: title, encrypted: state.message && base26(state.message)})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.type])
 
   const addToIgnoreList = (message: string) => {
-    const cipher = increment(state.message)
-    const parsed = JSON.parse(Props.settings.warningsIgnoreList)
-    if(!parsed.includes(state.encrypted)){
+    const cipher = base26(message)
+    if(!Props.settings.warningsIgnoreList.includes(cipher)){
       Props.setSettings({...Props.settings, warningsIgnoreList: [...Props.settings.warningsIgnoreList, cipher]})
     }
   }
 
   const show = (type: string, message: string, fn?: any) => {
-    setState({...state, shown: true, type, message, fn})
+    const cipher = base26(message)
+    if(!Props.settings.warningsIgnoreList.includes(cipher)){
+      setState({...state, shown: true, type, message, fn})
+    }
   }
 
   const WarningWrapper = () => {

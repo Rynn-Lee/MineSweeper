@@ -3,6 +3,7 @@ import React from 'react'
 import Visuals from './Sidebar/Visuals'
 import Game from './Sidebar/Game'
 import Interface from './Sidebar/Interface'
+import OtherSettings from './Sidebar/OtherSettings'
 
 export default function Sidebar({setters, getters}: any){
   return(
@@ -18,6 +19,10 @@ export default function Sidebar({setters, getters}: any){
           getters={getters}
           setters={setters}/>
         <Interface
+          styles={styles}
+          getters={getters}
+          setters={setters}/>
+        <OtherSettings
           styles={styles}
           getters={getters}
           setters={setters}/>

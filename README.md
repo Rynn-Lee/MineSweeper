@@ -1,19 +1,13 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 🤔 What's this project?
+This was supposed to be my diploma, but i changed the diploma topic<br>
+This is a minesweeper game that was supposed to have a multiplayer up to 8 players and various modes<br>
+It's probably halfway done, but i'm too lazy to finish it<br>
 
-## Getting Started
+## 💻 What tech stack is used?
+Front-end: NextJS, Sass, styled-components<br>
+Back-end: Tauri<br>
+State management: context-api <br>
 
-First, run the development server:
+## ✏️ How it looks like? 
+![Preview](https://github.com/Rynn-Lee/MineSweeper_Tauri.SocketIO/blob/main/public/Preview.png)
 
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
